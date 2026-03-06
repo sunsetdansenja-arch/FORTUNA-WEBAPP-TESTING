@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortuna Laundry Mobile-Ready</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s; }
+        .active-filter { background-color: #2563eb !important; color: white !important; }
+        .active-sub { background-color: #dbeafe !important; color: #1e40af !important; border-color: #bfdbfe !important; }
+        .dark { background-color: #0f172a; color: #f1f5f9; }
+        .dark .bg-white { background-color: #1e293b; border-color: #334155; }
+        
+        /* Mobile-Specific Table Hide */
+        @media (max-width: 768px) {
+            .desktop-table { display: none; }
+            .mobile-cards { display: block; }
+        }
+        @media (min-width: 769px) {
+            .desktop-table { display: table; }
+            .mobile-cards { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900" id="body-tag">
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-64 bg-white border-b md:border-r border-slate-200 p-4 md:p-6 flex-shrink-0 sticky top-0 z-50 md:relative">
+            <div class="flex items-center justify-between mb-4 md:mb-10">
+                <div class="flex items-center gap-3">
+                    <div class="bg-blue-600 p-2 rounded-xl text-white shadow-md"><i data-lucide="waves"></i></div>
+                    <span class="text-xl font-extrabold text-blue-600">FORTUNA</span>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="fetchData()" class="md:hidden p-2 bg-slate-100 rounded-lg text-slate-600"><i data-lucide="refresh-cw" class="w-5 h-5"></i></button>
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-lg hover:bg-slate-100"><i data-lucide="moon" class="w-5 h-5 text-slate-500"></i></button>
+                </div>
+            </div>
+
+            <nav class="flex md:flex-col gap-2 md:space-y-6 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+                <div class="min-w-fit md:min-w-full">
+                    <p class="hidden md:block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-4">Operasional</p>
+                    <div class="flex md:flex-col gap-2">
+                        <button onclick="updateMainFilter('order', this)" class="filter-btn flex items-center gap-2 px-4 py-2.5 md:py-3 text-sm font-bold rounded-xl active-filter whitespace-nowrap">
+                            <i data-lucide="clipboard-list" class="w-4 h-4"></i> Log Order
+                        </button>
+                        <button onclick="updateMainFilter('status', this)" class="filter-btn flex items-center gap-2 px-4 py-2.5 md:py-3 text-sm font-medium text-slate-600 rounded-xl hover:bg-blue-50 whitespace-nowrap">
+                            <i data-lucide="activity" class="w-4 h-4"></i> Status
+                        </button>
+                        <button onclick="updateMainFilter('pelanggan', this)" class="filter-btn flex items-center gap-2 px-4 py-2.5 md:py-3 text-sm font-medium text-slate-600 rounded-xl hover:bg-blue-50 whitespace-nowrap md:mt-4">
+                            <i data-lucide="users" class="w-4 h-4"></i> Pelanggan
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <div id="sub-filter-order" class="mt-4 flex gap-2 overflow-x-auto no-scrollbar pb-2">
+                <button onclick="updateSubFilter('today', this)" class="sub-btn px-4 py-1.5 text-xs font-bold rounded-full active-sub border whitespace-nowrap">Hari Ini</button>
+                <button onclick="updateSubFilter('yesterday', this)" class="sub-btn px-4 py-1.5 text-xs font-medium text-slate-500 border rounded-full whitespace-nowrap">Kemarin</button>
+                <button onclick="updateSubFilter('this_week', this)" class="sub-btn px-4 py-1.5 text-xs font-medium text-slate-500 border rounded-full whitespace-nowrap">7 Hari</button>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-4 md:p-10 max-w-7xl mx-auto w-full">
+            <header class="hidden md:flex justify-between items-end mb-8">
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight">Dashboard Fortuna</h1>
+                    <p class="text-slate-500 text-sm mt-1">Monitoring operasional real-time.</p>
+                </div>
+                <button onclick="fetchData()" class="p-3 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 shadow-sm transition-all active:scale-95">
+                    <i data-lucide="refresh-cw" class="w-5 h-5 text-slate-600"></i>
+                </button>
+            </header>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 mb-6 md:mb-10">
+                <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <p class="text-[10px] md:text-xs font-bold text-slate-400 uppercase mb-1">Total</p>
+                    <h3 id="stat-total" class="text-xl md:text-3xl font-black">0</h3>
+                </div>
+                <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <p class="text-[10px] md:text-xs font-bold text-slate-400 uppercase mb-1">Berat</p>
+                    <h3 id="stat-weight" class="text-xl md:text-3xl font-black">0 <span class="text-xs font-normal">Kg</span></h3>
+                </div>
+                <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm col-span-2 md:col-span-1">
+                    <p class="text-[10px] md:text-xs font-bold text-slate-400 uppercase mb-1 text-center md:text-left">Omzet</p>
+                    <h3 id="stat-revenue" class="text-xl md:text-3xl font-black text-green-600 text-center md:text-left">Rp 0</h3>
+                </div>
+            </div>
+
+            <div class="bg-white md:rounded-3xl border-t border-b md:border border-slate-200 shadow-sm overflow-hidden">
+                <table class="desktop-table w-full text-left border-collapse">
+                    <thead id="table-head" class="bg-slate-900 text-white"></thead>
+                    <tbody id="table-body" class="divide-y divide-slate-100"></tbody>
+                </table>
+
+                <div id="mobile-body" class="mobile-cards p-4 space-y-4"></div>
+
+                <div id="loading-state" class="hidden p-12 text-center">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-blue-600 border-t-transparent"></div>
+                </div>
+                <div id="empty-state" class="hidden p-10 text-center">
+                    <p class="text-slate-500 font-bold italic">Data tidak ditemukan</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const WEBHOOK_URL = 'https://n8n-mzbmiib3etk4.kangkung.sumopod.my.id/webhook/3f7b4c1a-badd-4a58-ba4f-fd278f0a4cac';
+        let currentAction = 'order';
+        let currentTimeFilter = 'today';
+
+        function toggleDarkMode() { document.getElementById('body-tag').classList.toggle('dark'); lucide.createIcons(); }
+
+        function updateMainFilter(type, btn) {
+            currentAction = type;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active-filter', 'font-bold'));
+            btn.classList.add('active-filter', 'font-bold');
+            document.getElementById('sub-filter-order').classList.toggle('hidden', type !== 'order');
+            fetchData();
+        }
+
+        function updateSubFilter(time, btn) {
+            currentTimeFilter = time;
+            document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active-sub', 'font-bold'));
+            btn.classList.add('active-sub', 'font-bold');
+            fetchData();
+        }
+
+        async function fetchData() {
+            const body = document.getElementById('table-body');
+            const mBody = document.getElementById('mobile-body');
+            const loading = document.getElementById('loading-state');
+            const empty = document.getElementById('empty-state');
+            
+            body.innerHTML = ''; mBody.innerHTML = '';
+            loading.classList.remove('hidden'); empty.classList.add('hidden');
+
+            let payload = currentAction === 'order' ? { action: 'cek_log_order', action_1: currentTimeFilter } : 
+                         currentAction === 'status' ? { action: 'cek_status_order' } : { action: 'data_pelanggan' };
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const rawData = await response.json();
+                let items = Array.isArray(rawData) ? rawData : (rawData.items || []);
+                if (items.length > 0 && items[0].json) items = items.map(i => i.json);
+
+                items = items.filter(i => {
+                    const nama = (i["NAMA CUSTOMER"] || i["NAMA"] || "").toString().toUpperCase();
+                    return nama !== "KOSONG" && nama !== "";
+                });
+
+                if (items.length === 0) { empty.classList.remove('hidden'); updateStats([]); }
+                else { renderHeader(); renderData(items); updateStats(items); }
+            } catch (err) { empty.classList.remove('hidden'); }
+            finally { loading.classList.add('hidden'); lucide.createIcons(); }
+        }
+
+        function renderHeader() {
+            const head = document.getElementById('table-head');
+            if (currentAction === 'pelanggan') {
+                head.innerHTML = `<tr><th class="px-6 py-4 text-[10px] uppercase">Nama Pelanggan</th><th class="px-6 py-4 text-[10px] uppercase">WhatsApp</th><th class="px-6 py-4 text-center text-[10px] uppercase">Aksi</th></tr>`;
+            } else {
+                head.innerHTML = `<tr><th class="px-6 py-4 text-[10px] uppercase">ID</th><th class="px-6 py-4 text-[10px] uppercase">Nama</th><th class="px-6 py-4 text-[10px] uppercase">Layanan</th><th class="px-6 py-4 text-center text-[10px] uppercase">Status</th><th class="px-4 py-4 text-right text-[10px] uppercase tracking-widest">Aksi</th></tr>`;
+            }
+        }
+
+        function renderData(items) {
+            const body = document.getElementById('table-body');
+            const mBody = document.getElementById('mobile-body');
+
+            items.forEach(item => {
+                const isPelanggan = currentAction === 'pelanggan';
+                const nama = item["NAMA CUSTOMER"] || item["NAMA"] || "-";
+                const wa = item["NOMOR HP"] || item["NOMOR"] || "-";
+                const status = item.STATUS || "Proses";
+                const color = String(status).toLowerCase().includes('selesai') ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700';
+
+                // Desktop Row
+                if (isPelanggan) {
+                    body.innerHTML += `<tr class="hover:bg-slate-50"><td class="px-6 py-4 font-bold text-blue-600">${nama}</td><td class="px-6 py-4">${wa}</td><td class="px-6 py-4 text-center"><a href="https://wa.me/${wa}" target="_blank" class="p-2 bg-green-500 text-white rounded-lg inline-block"><i data-lucide="message-circle" class="w-4 h-4"></i></a></td></tr>`;
+                } else {
+                    body.innerHTML += `<tr class="hover:bg-slate-50"><td class="px-6 py-4 text-xs font-mono">#${item.ID || '-'}</td><td class="px-6 py-4 font-bold">${nama}</td><td class="px-6 py-4 text-xs text-slate-500">${item["PAKET/CUCIAN"] || '-'}</td><td class="px-6 py-4 text-center"><span class="px-2 py-1 rounded text-[10px] font-bold ${color}">${status}</span></td><td class="px-4 py-4 text-right"><a href="https://wa.me/${wa}" target="_blank" class="p-2 bg-green-500 text-white rounded-lg inline-block"><i data-lucide="message-circle" class="w-4 h-4"></i></a></td></tr>`;
+                }
+
+                // Mobile Card
+                mBody.innerHTML += `
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl flex justify-between items-center shadow-sm">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono text-slate-400">#${item.ID || 'ID'}</span>
+                                <span class="px-2 py-0.5 rounded-full text-[9px] font-black uppercase ${color}">${status}</span>
+                            </div>
+                            <p class="font-extrabold text-slate-900 truncate">${nama}</p>
+                            <p class="text-xs text-slate-500">${item["PAKET/CUCIAN"] || (isPelanggan ? wa : '-')}</p>
+                            ${!isPelanggan ? `<p class="text-xs font-bold text-blue-600 mt-1">${formatRupiah(item.TAGIHAN)} - ${item.BERAT}kg</p>` : ''}
+                        </div>
+                        <a href="https://wa.me/${wa}" target="_blank" class="ml-4 p-4 bg-green-500 text-white rounded-2xl shadow-lg active:scale-90 transition-transform">
+                            <i data-lucide="message-circle" class="w-6 h-6"></i>
+                        </a>
+                    </div>`;
+            });
+        }
+
+        function formatRupiah(v) { return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(v || 0); }
+        function updateStats(items) {
+            document.getElementById('stat-total').innerText = items.length;
+            if (currentAction === 'pelanggan') {
+                document.getElementById('stat-weight').innerText = "-";
+                document.getElementById('stat-revenue').innerText = "-";
+            } else {
+                document.getElementById('stat-weight').innerText = items.reduce((sum, i) => sum + (parseFloat(i.BERAT) || 0), 0).toFixed(1);
+                document.getElementById('stat-revenue').innerText = formatRupiah(items.reduce((sum, i) => sum + (parseInt(i.TAGIHAN) || 0), 0));
+            }
+        }
+
+        window.onload = () => { lucide.createIcons(); fetchData(); };
+    </script>
+</body>
+</html>
