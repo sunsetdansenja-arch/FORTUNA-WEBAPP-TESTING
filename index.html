@@ -1,911 +1,912 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FamilyFood SC Control</title>
-    
-    <link rel="icon" type="image/png" href="./LOGO FFI.png">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        appbg: '#000000',      
-                        appcard: '#1C1C1E',    
-                        appinput: '#2C2C2E',    
-                        appapplered: '#FF3B30',  
-                        appappleblue: '#ADD8E6', 
-                        appappleorange: '#FF9500', 
-                        appgreen: '#34C759',   
-                        appred: '#FF3B30'      
-                    },
-                    borderRadius: { '3xl': '1.5rem', '4xl': '2rem' },
-                    fontFamily: {
-                        'apple': ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
-                    },
-                    boxShadow: { 
-                        'glow-redorange': '0 0 25px rgba(255, 59, 48, 0.35)', 
-                        'glow-lightblue': '0 0 15px rgba(173, 216, 230, 0.25)' 
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
-                        'shimmer': 'shimmer 1.5s infinite linear'
-                    },
-                    keyframes: {
-                        fadeInUp: { '0%': { opacity: 0, transform: 'translateY(15px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
-                        shimmer: { '0%': { transform: 'translateX(-100%)' }, '100%': { transform: 'translateX(100%)' } }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { background-color: #000000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
-        .hidden-tab { display: none !important; }
-        ::-webkit-scrollbar { width: 0px; height: 0px; background: transparent; }
-        
-        input, select { background-color: #2C2C2E; border: 1.5px solid transparent; transition: all 0.25s; color: white; width: 100%; border-radius: 1.25rem; padding: 1.1rem 1.4rem; outline: none; font-weight: 600; font-size: 0.95rem; }
-        input[type="month"] { padding: 0.8rem 1.2rem; }
-        input:focus, select:focus { border-color: #FF3B30; background-color: #1C1C1E; box-shadow: 0 0 15px rgba(255,59,48,0.25); }
-        input::-webkit-calendar-picker-indicator { filter: invert(1); opacity: 0.6; cursor: pointer; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FamilyFood SC Control</title>
+    
+    <link rel="icon" type="image/png" href="./LOGO FFI.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        appbg: '#000000',      
+                        appcard: '#1C1C1E',    
+                        appinput: '#2C2C2E',    
+                        appapplered: '#FF3B30',  
+                        appappleblue: '#ADD8E6', 
+                        appappleorange: '#FF9500', 
+                        appgreen: '#34C759',   
+                        appred: '#FF3B30'      
+                    },
+                    borderRadius: { '3xl': '1.5rem', '4xl': '2rem' },
+                    fontFamily: {
+                        'apple': ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                    },
+                    boxShadow: { 
+                        'glow-redorange': '0 0 25px rgba(255, 59, 48, 0.35)', 
+                        'glow-lightblue': '0 0 15px rgba(173, 216, 230, 0.25)' 
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                        'shimmer': 'shimmer 1.5s infinite linear'
+                    },
+                    keyframes: {
+                        fadeInUp: { '0%': { opacity: 0, transform: 'translateY(15px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+                        shimmer: { '0%': { transform: 'translateX(-100%)' }, '100%': { transform: 'translateX(100%)' } }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #000000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
+        .hidden-tab { display: none !important; }
+        ::-webkit-scrollbar { width: 0px; height: 0px; background: transparent; }
+        
+        input, select { background-color: #2C2C2E; border: 1.5px solid transparent; transition: all 0.25s; color: white; width: 100%; border-radius: 1.25rem; padding: 1.1rem 1.4rem; outline: none; font-weight: 600; font-size: 0.95rem; }
+        input[type="month"] { padding: 0.8rem 1.2rem; }
+        input:focus, select:focus { border-color: #FF3B30; background-color: #1C1C1E; box-shadow: 0 0 15px rgba(255,59,48,0.25); }
+        input::-webkit-calendar-picker-indicator { filter: invert(1); opacity: 0.6; cursor: pointer; }
 
-        .btn-tactile { transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; }
-        .btn-tactile:active { transform: scale(0.96); opacity: 0.92; }
-        
-        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.45s ease-out, opacity 0.35s; opacity: 0; }
-        .accordion-expanded { max-height: 800px; opacity: 1; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.75rem; margin-top: 0.75rem; }
-        
-        #toast { transform: translateY(-150%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .toast-show { transform: translateY(0) !important; }
-        
-        .skeleton-box { position: relative; overflow: hidden; background-color: #1C1C1E; }
-        .skeleton-box::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent); animation: shimmer 1.5s infinite; }
+        .btn-tactile { transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; }
+        .btn-tactile:active { transform: scale(0.96); opacity: 0.92; }
+        
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.45s ease-out, opacity 0.35s; opacity: 0; }
+        .accordion-expanded { max-height: 800px; opacity: 1; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.75rem; margin-top: 0.75rem; }
+        
+        #toast { transform: translateY(-150%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .toast-show { transform: translateY(0) !important; }
+        
+        .skeleton-box { position: relative; overflow: hidden; background-color: #1C1C1E; }
+        .skeleton-box::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent); animation: shimmer 1.5s infinite; }
 
-        /* WADAH KERTAS A4 VIRTUAL */
-        .a4-wrapper { overflow-x: auto; background-color: #1C1C1E; border-radius: 1rem; padding: 10px; border: 1px solid rgba(255,255,255,0.1); position: relative; }
-        .a4-paper { width: 794px; min-height: 1122px; background: white; color: black; padding: 40px; font-family: Arial, sans-serif; box-sizing: border-box; position: relative; margin: 0 auto; }
+        /* WADAH KERTAS A4 VIRTUAL */
+        .a4-wrapper { overflow-x: auto; background-color: #1C1C1E; border-radius: 1rem; padding: 10px; border: 1px solid rgba(255,255,255,0.1); position: relative; }
+        .a4-paper { width: 794px; min-height: 1122px; background: white; color: black; padding: 40px; font-family: Arial, sans-serif; box-sizing: border-box; position: relative; margin: 0 auto; }
 
-        /* HILANGKAN PANAH PADA INPUT NUMBER */
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        input[type="number"] { -moz-appearance: textfield; } 
+        /* HILANGKAN PANAH PADA INPUT NUMBER */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] { -moz-appearance: textfield; } 
 
-        /* RESET PADDING KHUSUS KOTAK SKU */
-        .sku-input { 
-            padding: 0 !important; 
-            background: transparent !important; 
-            border: none !important; 
-            box-shadow: none !important; 
-            text-align: center; 
-            font-weight: 900; 
-            outline: none !important; 
-        }
-    </style>
+        /* RESET PADDING KHUSUS KOTAK SKU */
+        .sku-input { 
+            padding: 0 !important; 
+            background: transparent !important; 
+            border: none !important; 
+            box-shadow: none !important; 
+            text-align: center; 
+            font-weight: 900; 
+            outline: none !important; 
+        }
+    </style>
 </head>
 <body class="flex justify-center antialiased font-apple relative">
 
-    <datalist id="date-recom"></datalist>
-    <datalist id="recent-po-ids"></datalist>
+    <datalist id="date-recom"></datalist>
+    <datalist id="recent-po-ids"></datalist>
 
-    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-[100] bg-appcard border-2 border-appapplered text-white px-7 py-3 rounded-full shadow-glow-redorange font-extrabold text-sm flex items-center gap-3 w-max max-w-[90%] pointer-events-none">
-        <span id="toast-icon">✅</span>
-        <span id="toast-msg">Success</span>
-    </div>
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-[100] bg-appcard border-2 border-appapplered text-white px-7 py-3 rounded-full shadow-glow-redorange font-extrabold text-sm flex items-center gap-3 w-max max-w-[90%] pointer-events-none">
+        <span id="toast-icon">✅</span>
+        <span id="toast-msg">Success</span>
+    </div>
 
-    <div id="modal-dc" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[100] hidden-tab flex flex-col px-4 pt-12 pb-6">
-        <div class="w-full max-w-4xl mx-auto flex flex-col h-full">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-white font-black text-2xl italic tracking-tight text-appapplered px-2">Pilih Nama DC</h3>
-                <button type="button" onclick="closeDCModal()" class="text-gray-400 bg-white/10 p-3 rounded-full btn-tactile hover:text-white">✕</button>
-            </div>
-            <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3.5 overflow-y-auto pb-10 content-start flex-1 px-2" id="dc-grid"></div>
-        </div>
-    </div>
+    <div id="modal-dc" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[100] hidden-tab flex flex-col px-4 pt-12 pb-6">
+        <div class="w-full max-w-4xl mx-auto flex flex-col h-full">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-white font-black text-2xl italic tracking-tight text-appapplered px-2">Pilih Nama DC</h3>
+                <button type="button" onclick="closeDCModal()" class="text-gray-400 bg-white/10 p-3 rounded-full btn-tactile hover:text-white">✕</button>
+            </div>
+            <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3.5 overflow-y-auto pb-10 content-start flex-1 px-2" id="dc-grid"></div>
+        </div>
+    </div>
 
-    <div id="pdf-container"></div>
+    <div id="pdf-container"></div>
 
-    <div id="app" class="w-full max-w-md md:max-w-5xl bg-appbg min-h-screen relative overflow-x-hidden flex flex-col shadow-2xl mx-auto md:border-x border-white/5">
-        
-        <div id="view-login" class="flex flex-col h-screen p-9 justify-center items-center relative z-40 bg-[#000000]">
-            <div class="w-full max-w-sm md:max-w-md space-y-12">
-                <div class="text-center space-y-4">
-                    <img src="./LOGO FFI.png" alt="Family Food Logo" onerror="this.src='https://via.placeholder.com/150/FF3B30/FFFFFF?text=FFI'" class="w-36 md:w-48 h-auto mx-auto mb-8 drop-shadow-[0_0_20px_rgba(255,59,48,0.4)] animate-fade-in-up">
-                    <p class="text-[11px] md:text-xs text-gray-500 uppercase tracking-[0.35em] font-extrabold">Secure Access Center</p>
-                </div>
-                <form id="form-login" onsubmit="handleLogin(event)" class="space-y-5">
-                    <input type="text" id="login-user" placeholder="USER ID" required class="text-center font-black uppercase tracking-widest bg-appinput border-white/5 md:py-4">
-                    <input type="password" id="login-pass" placeholder="PASSWORD" required class="text-center font-black tracking-widest bg-appinput border-white/5 md:py-4">
-                    <button type="submit" id="btn-login" class="w-full bg-appapplered text-white font-extrabold py-4.5 md:py-5 rounded-2xl shadow-glow-redorange mt-6 btn-tactile text-sm md:text-base">MASUK SISTEM</button>
-                </form>
-            </div>
-        </div>
+    <div id="app" class="w-full max-w-md md:max-w-5xl bg-appbg min-h-screen relative overflow-x-hidden flex flex-col shadow-2xl mx-auto md:border-x border-white/5">
+        
+        <div id="view-login" class="flex flex-col h-screen p-9 justify-center items-center relative z-40 bg-[#000000]">
+            <div class="w-full max-w-sm md:max-w-md space-y-12">
+                <div class="text-center space-y-4">
+                    <img src="./LOGO FFI.png" alt="Family Food Logo" onerror="this.src='https://via.placeholder.com/150/FF3B30/FFFFFF?text=FFI'" class="w-36 md:w-48 h-auto mx-auto mb-8 drop-shadow-[0_0_20px_rgba(255,59,48,0.4)] animate-fade-in-up">
+                    <p class="text-[11px] md:text-xs text-gray-500 uppercase tracking-[0.35em] font-extrabold">Secure Access Center</p>
+                </div>
+                <form id="form-login" onsubmit="handleLogin(event)" class="space-y-5">
+                    <input type="text" id="login-user" placeholder="USER ID" required class="text-center font-black uppercase tracking-widest bg-appinput border-white/5 md:py-4">
+                    <input type="password" id="login-pass" placeholder="PASSWORD" required class="text-center font-black tracking-widest bg-appinput border-white/5 md:py-4">
+                    <button type="submit" id="btn-login" class="w-full bg-appapplered text-white font-extrabold py-4.5 md:py-5 rounded-2xl shadow-glow-redorange mt-6 btn-tactile text-sm md:text-base">MASUK SISTEM</button>
+                </form>
+            </div>
+        </div>
 
-        <div id="view-main" class="hidden-tab flex-col h-full">
-            
-            <div class="px-6 py-4 md:px-10 md:py-6 sticky top-0 bg-[#000000]/92 backdrop-blur-xl z-20 flex justify-between items-center border-b border-white/7">
-                <div class="flex items-center gap-4">
-                    <img src="./LOGO FFI.png" alt="Family Food Logo" onerror="this.src='https://via.placeholder.com/50/FF3B30/FFFFFF?text=FFI'" class="h-9 md:h-12 w-auto object-contain drop-shadow-[0_0_10px_rgba(255,59,48,0.25)]">
-                    <h2 class="text-lg md:text-2xl font-black text-white tracking-tighter italic leading-none uppercase">Family<span class="text-appappleorange">Food</span></h2>
-                </div>
-                <div class="flex items-center gap-2 bg-white/10 px-4 py-2 md:px-5 md:py-2.5 rounded-full">
-                    <span class="w-2.5 h-2.5 rounded-full bg-appgreen animate-pulse shadow-[0_0_8px_#34C759]"></span>
-                    <p id="header-username" class="text-[10px] md:text-xs text-gray-300 uppercase font-extrabold tracking-widest">USER</p>
-                </div>
-            </div>
+        <div id="view-main" class="hidden-tab flex-col h-full">
+            
+            <div class="px-6 py-4 md:px-10 md:py-6 sticky top-0 bg-[#000000]/92 backdrop-blur-xl z-20 flex justify-between items-center border-b border-white/7">
+                <div class="flex items-center gap-4">
+                    <img src="./LOGO FFI.png" alt="Family Food Logo" onerror="this.src='https://via.placeholder.com/50/FF3B30/FFFFFF?text=FFI'" class="h-9 md:h-12 w-auto object-contain drop-shadow-[0_0_10px_rgba(255,59,48,0.25)]">
+                    <h2 class="text-lg md:text-2xl font-black text-white tracking-tighter italic leading-none uppercase">Family<span class="text-appappleorange">Food</span></h2>
+                </div>
+                <div class="flex items-center gap-2 bg-white/10 px-4 py-2 md:px-5 md:py-2.5 rounded-full">
+                    <span class="w-2.5 h-2.5 rounded-full bg-appgreen animate-pulse shadow-[0_0_8px_#34C759]"></span>
+                    <p id="header-username" class="text-[10px] md:text-xs text-gray-300 uppercase font-extrabold tracking-widest">USER</p>
+                </div>
+            </div>
 
-            <div class="flex-1 overflow-y-auto pb-36 md:pb-40">
-                
-                <div id="tab-analytics" class="p-6 md:p-10 space-y-6 md:space-y-8 animate-fade-in-up">
-                    <div class="flex flex-col md:flex-row gap-4 md:gap-6">
-                        <div class="flex-1 bg-appcard border border-white/7 p-6 rounded-4xl flex flex-col justify-between shadow-glow-lightblue transition-all hover:shadow-[0_0_20px_rgba(173,216,230,0.3)]">
-                            <p class="text-[10px] md:text-xs uppercase font-bold text-gray-500 tracking-widest">Total SKU</p>
-                            <p id="stat-sku" class="text-5xl font-black text-white mt-2 ticker">0</p>
-                        </div>
-                        <div class="flex-1 bg-appcard border border-white/7 p-6 rounded-4xl flex flex-col justify-between transition-all hover:shadow-[0_0_20px_rgba(173,216,230,0.1)]">
-                            <p class="text-[10px] md:text-xs uppercase font-bold text-gray-500 tracking-widest text-appappleblue">DC Terpantau</p>
-                            <p id="stat-dc" class="text-5xl font-black text-white mt-2 ticker">0</p>
-                        </div>
-                    </div>
+            <div class="flex-1 overflow-y-auto pb-36 md:pb-40">
+                
+                <div id="tab-analytics" class="p-6 md:p-10 space-y-6 md:space-y-8 animate-fade-in-up">
+                    <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+                        <div class="flex-1 bg-appcard border border-white/7 p-6 rounded-4xl flex flex-col justify-between shadow-glow-lightblue transition-all hover:shadow-[0_0_20px_rgba(173,216,230,0.3)]">
+                            <p class="text-[10px] md:text-xs uppercase font-bold text-gray-500 tracking-widest">Total SKU</p>
+                            <p id="stat-sku" class="text-5xl font-black text-white mt-2 ticker">0</p>
+                        </div>
+                        <div class="flex-1 bg-appcard border border-white/7 p-6 rounded-4xl flex flex-col justify-between transition-all hover:shadow-[0_0_20px_rgba(173,216,230,0.1)]">
+                            <p class="text-[10px] md:text-xs uppercase font-bold text-gray-500 tracking-widest text-appappleblue">DC Terpantau</p>
+                            <p id="stat-dc" class="text-5xl font-black text-white mt-2 ticker">0</p>
+                        </div>
+                    </div>
 
-                    <button type="button" onclick="loadAnalytics()" id="btn-sync-analytics" class="w-full bg-white text-black font-extrabold py-4 md:py-5 rounded-2xl btn-tactile shadow-[0_0_25px_rgba(255,255,255,0.2)] flex justify-center items-center gap-3 text-xs md:text-sm uppercase tracking-widest hover:scale-[0.98] transition-transform">
-                        <i class="fa-solid fa-rotate-right" id="sync-icon"></i> SYNC DATA ANALYTIC
-                    </button>
+                    <button type="button" onclick="loadAnalytics()" id="btn-sync-analytics" class="w-full bg-white text-black font-extrabold py-4 md:py-5 rounded-2xl btn-tactile shadow-[0_0_25px_rgba(255,255,255,0.2)] flex justify-center items-center gap-3 text-xs md:text-sm uppercase tracking-widest hover:scale-[0.98] transition-transform">
+                        <i class="fa-solid fa-rotate-right" id="sync-icon"></i> SYNC DATA ANALYTIC
+                    </button>
 
-                    <div class="bg-appcard rounded-4xl border border-appappleblue/25 shadow-glow-lightblue overflow-hidden">
-                        <div class="bg-appappleblue/10 px-6 py-5 md:px-8 border-b border-appappleblue/15">
-                            <h4 class="text-sm md:text-base font-black text-appappleblue uppercase tracking-widest">📦 INVENTORY HEALTH</h4>
-                        </div>
-                        <div class="p-3 md:p-5 overflow-x-auto">
-                            <div class="min-w-[340px]">
-                                <div class="grid grid-cols-5 gap-1.5 px-4 py-3 text-[9px] md:text-[11px] text-gray-500 font-extrabold uppercase tracking-widest border-b border-white/5 text-center">
-                                    <div class="text-left">NAMA SKU</div>
-                                    <div>AVG 3 BLN</div>
-                                    <div id="th-forecast" class="text-appappleblue italic">FORECAST</div>
-                                    <div id="th-buffer" class="text-appapplered italic">BUFFER</div>
-                                    <div>STATUS</div>
-                                </div>
-                                <div id="forecast-container" class="px-3 pb-3">
-                                    <div class="py-12 text-center opacity-30 italic text-xs">Tekan Sync Data...</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="bg-appcard rounded-4xl border border-appappleblue/25 shadow-glow-lightblue overflow-hidden">
+                        <div class="bg-appappleblue/10 px-6 py-5 md:px-8 border-b border-appappleblue/15">
+                            <h4 class="text-sm md:text-base font-black text-appappleblue uppercase tracking-widest">📦 INVENTORY HEALTH</h4>
+                        </div>
+                        <div class="p-3 md:p-5 overflow-x-auto">
+                            <div class="min-w-[340px]">
+                                <div class="grid grid-cols-5 gap-1.5 px-4 py-3 text-[9px] md:text-[11px] text-gray-500 font-extrabold uppercase tracking-widest border-b border-white/5 text-center">
+                                    <div class="text-left">NAMA SKU</div>
+                                    <div>AVG 3 BLN</div>
+                                    <div id="th-forecast" class="text-appappleblue italic">FORECAST</div>
+                                    <div id="th-buffer" class="text-appapplered italic">BUFFER</div>
+                                    <div>STATUS</div>
+                                </div>
+                                <div id="forecast-container" class="px-3 pb-3">
+                                    <div class="py-12 text-center opacity-30 italic text-xs">Tekan Sync Data...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="space-y-4 pt-4">
-                        <h4 class="text-xs md:text-sm font-black text-appappleblue uppercase tracking-[0.2em] px-3">DC Diagnose Results</h4>
-                        <div id="diagnosa-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-                    </div>
-                </div>
+                    <div class="space-y-4 pt-4">
+                        <h4 class="text-xs md:text-sm font-black text-appappleblue uppercase tracking-[0.2em] px-3">DC Diagnose Results</h4>
+                        <div id="diagnosa-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                    </div>
+                </div>
 
-                <div id="tab-report" class="hidden-tab p-6 md:p-10 space-y-6 md:space-y-8 animate-fade-in-up">
-                    <div class="flex bg-appcard p-1.5 rounded-2xl border border-white/7 shadow-xl max-w-2xl mx-auto w-full">
-                        <button type="button" onclick="switchReportView('analytic')" id="btn-rep-analytic" class="flex-1 py-3 md:py-4 rounded-xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appappleblue text-black shadow-glow-lightblue">Analytic Report</button>
-                        <button type="button" onclick="switchReportView('log')" id="btn-rep-log" class="flex-1 py-3 md:py-4 rounded-xl text-xs md:text-sm font-extrabold uppercase transition-all text-gray-500 bg-transparent">Log PO Report</button>
-                    </div>
+                <div id="tab-report" class="hidden-tab p-6 md:p-10 space-y-6 md:space-y-8 animate-fade-in-up">
+                    <div class="flex bg-appcard p-1.5 rounded-2xl border border-white/7 shadow-xl max-w-2xl mx-auto w-full">
+                        <button type="button" onclick="switchReportView('analytic')" id="btn-rep-analytic" class="flex-1 py-3 md:py-4 rounded-xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appappleblue text-black shadow-glow-lightblue">Analytic Report</button>
+                        <button type="button" onclick="switchReportView('log')" id="btn-rep-log" class="flex-1 py-3 md:py-4 rounded-xl text-xs md:text-sm font-extrabold uppercase transition-all text-gray-500 bg-transparent">Log PO Report</button>
+                    </div>
 
-                    <div id="rep-view-analytic" class="space-y-6">
-                        <div class="flex flex-col md:flex-row gap-3 md:gap-4 max-w-2xl mx-auto w-full">
-                            <input type="month" id="analytic-month" class="bg-appcard border border-white/10 text-white rounded-2xl flex-1 outline-none text-xs md:text-sm text-center font-bold px-3" required onchange="renderAnalyticPreview()">
-                            <button onclick="downloadPDF('print-analytic', 'FFI_Analytic_Report')" class="w-full md:w-auto bg-white text-black font-extrabold px-6 py-4 rounded-2xl btn-tactile shadow-[0_0_20px_rgba(255,255,255,0.3)] flex justify-center items-center gap-2 text-xs md:text-sm uppercase tracking-widest hover:scale-[0.98] transition-transform">
-                                <i class="fa-solid fa-download text-lg"></i> <span class="md:hidden ml-1">DOWNLOAD PDF</span>
-                            </button>
-                        </div>
-                        <p class="text-[9px] md:text-xs text-gray-500 text-center uppercase tracking-widest font-bold">⬇️ Preview Laporan Asli ⬇️</p>
-                        
-                        <div class="a4-wrapper" id="wrap-print-analytic">
-                            <div id="print-analytic" class="a4-paper">
-                                <div style="text-align: center; margin-bottom: 25px; border-bottom: 2px solid #E5E7EB; padding-bottom: 15px;">
-                                    <h1 style="font-size: 26px; font-weight: 900; margin:0; color:#FF3B30; letter-spacing: 1px;">FAMILY FOOD INDONESIA</h1>
-                                    <p style="margin: 5px 0 0 0; color: #6B7280; font-size: 14px;">Executive Analytic Report</p>
-                                    <p style="margin: 2px 0 0 0; color: #888; font-size: 12px; font-style:italic;" id="report-date"></p>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; gap: 15px; margin-bottom: 30px;">
-                                    <div style="flex:1; background:#F9FAFB; padding:20px; border-radius:12px; border:1px solid #E5E7EB;">
-                                        <div style="font-size:11px; color:#6B7280; text-transform:uppercase; font-weight:800; letter-spacing: 0.5px;">Fulfillment PO</div>
-                                        <div id="rep-fulfill" style="font-size:28px; font-weight:900; margin-top:8px;">0%</div>
-                                    </div>
-                                    <div style="flex:1; background:#F9FAFB; padding:20px; border-radius:12px; border:1px solid #E5E7EB;">
-                                        <div style="font-size:11px; color:#6B7280; text-transform:uppercase; font-weight:800; letter-spacing: 0.5px;">Alert Stock (Real-Time)</div>
-                                        <div id="rep-alert" style="font-size:16px; font-weight:900; margin-top:14px;">N/A</div>
-                                    </div>
-                                    <div style="flex:1; background:#F9FAFB; padding:20px; border-radius:12px; border:1px solid #E5E7EB;">
-                                        <div style="font-size:11px; color:#6B7280; text-transform:uppercase; font-weight:800; letter-spacing: 0.5px;">Volume (PO / Sales)</div>
-                                        <div id="rep-prod" style="font-size:24px; font-weight:900; margin-top:8px; color:#2B65F6;">0 <span style="font-size:16px; color:#9CA3AF;">/</span> 0</div>
-                                    </div>
-                                </div>
-                                <div style="background:#F9FAFB; padding:20px; border-radius:12px; border:1px solid #E5E7EB; margin-bottom:30px; text-align:center;">
-                                    <div style="font-size:13px; color:#6B7280; text-transform:uppercase; font-weight:800; letter-spacing: 1px;">Global Inventory Health (Real-Time)</div>
-                                    <div id="rep-inv-health" style="font-size:22px; font-weight:900; margin-top:8px;">0 Critical | 0 Safe</div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; gap: 20px; align-items: center;">
-                                    <div style="flex:1; width:48%;">
-                                        <h4 style="font-size:14px; text-align:center; margin-bottom: 15px; font-weight: 800; color: #374151;">SKU Demand vs PO Target</h4>
-                                        <canvas id="chartBar"></canvas>
-                                    </div>
-                                    <div style="flex:1; width:48%;">
-                                        <h4 style="font-size:14px; text-align:center; margin-bottom: 15px; font-weight: 800; color: #374151;">DC Diagnose Distribution</h4>
-                                        <canvas id="chartPie"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="rep-view-analytic" class="space-y-6">
+                        <div class="flex flex-col md:flex-row gap-3 md:gap-4 max-w-2xl mx-auto w-full">
+                            <input type="month" id="analytic-month" class="bg-appcard border border-white/10 text-white rounded-2xl flex-1 outline-none text-xs md:text-sm text-center font-bold px-3" required onchange="renderAnalyticPreview()">
+                            <button onclick="downloadPDF('print-analytic', 'FFI_Analytic_Report')" class="w-full md:w-auto bg-white text-black font-extrabold px-6 py-4 rounded-2xl btn-tactile shadow-[0_0_20px_rgba(255,255,255,0.3)] flex justify-center items-center gap-2 text-xs md:text-sm uppercase tracking-widest hover:scale-[0.98] transition-transform">
+                                <i class="fa-solid fa-download text-lg"></i> <span class="md:hidden ml-1">DOWNLOAD PDF</span>
+                            </button>
+                        </div>
+                        <p class="text-[9px] md:text-xs text-gray-500 text-center uppercase tracking-widest font-bold">⬇️ Preview Laporan Asli ⬇️</p>
+                        
+                        <div class="a4-wrapper" id="wrap-print-analytic">
+                            <div id="print-analytic" class="a4-paper">
+                                <div style="text-align: center; margin-bottom: 25px; border-bottom: 2px solid #E5E7EB; padding-bottom: 15px;">
+                                    <h1 style="font-size: 26px; font-weight: 900; margin:0; color:#FF3B30; letter-spacing: 1px;">FAMILY FOOD INDONESIA</h1>
+                                    <p style="margin: 5px 0 0 0; color: #6B7280; font-size: 14px;">Executive Analytic Report</p>
+                                    <p style="margin: 2px 0 0 0; color: #888; font-size: 12px; font-style:italic;" id="report-date"></p>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; gap: 15px; margin-bottom: 30px;">
+                                    <div style="flex:1; background:#F9FAFB; padding:20px; border-radius:12px; border:1px solid #E5E7EB;">
+                                        <div style="font-size:11px; color:#6B7280; text-transform:uppercase; font-weight:800; letter-spacing: 0.5px;">Fulfillment PO</div>
+                                        <div id="rep-fulfill" style="font-size:28px; font-weight:900; margin-top:8px;">0%</div>
+                                    </div>
+                                    <div style="flex:1; background:#F9FAFB; padding:20px; border-radius:12px; border:1px solid #E5E7EB;">
+                                        <div style="font-size:11px; color:#6B7280; text-transform:uppercase; font-weight:800; letter-spacing: 0.5px;">Alert Stock (Real-Time)</div>
+                                        <div id="rep-alert" style="font-size:16px; font-weight:900; margin-top:14px;">N/A</div>
+                                    </div>
+                                    <div style="flex:1; background:#F9FAFB; padding:20px; border-radius:12px; border:1px solid #E5E7EB;">
+                                        <div style="font-size:11px; color:#6B7280; text-transform:uppercase; font-weight:800; letter-spacing: 0.5px;">Volume (PO / Sales)</div>
+                                        <div id="rep-prod" style="font-size:24px; font-weight:900; margin-top:8px; color:#2B65F6;">0 <span style="font-size:16px; color:#9CA3AF;">/</span> 0</div>
+                                    </div>
+                                </div>
+                                <div style="background:#F9FAFB; padding:20px; border-radius:12px; border:1px solid #E5E7EB; margin-bottom:30px; text-align:center;">
+                                    <div style="font-size:13px; color:#6B7280; text-transform:uppercase; font-weight:800; letter-spacing: 1px;">Global Inventory Health (Real-Time)</div>
+                                    <div id="rep-inv-health" style="font-size:22px; font-weight:900; margin-top:8px;">0 Critical | 0 Safe</div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; gap: 20px; align-items: center;">
+                                    <div style="flex:1; width:48%;">
+                                        <h4 style="font-size:14px; text-align:center; margin-bottom: 15px; font-weight: 800; color: #374151;">SKU Demand vs PO Target</h4>
+                                        <canvas id="chartBar"></canvas>
+                                    </div>
+                                    <div style="flex:1; width:48%;">
+                                        <h4 style="font-size:14px; text-align:center; margin-bottom: 15px; font-weight: 800; color: #374151;">DC Diagnose Distribution</h4>
+                                        <canvas id="chartPie"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div id="rep-view-log" class="hidden-tab space-y-6">
-                        <div class="flex flex-col md:flex-row gap-3 md:gap-4 max-w-3xl mx-auto w-full">
-                            <div class="flex gap-3 flex-1">
-                                <input type="month" id="report-month" class="bg-appcard border border-white/10 text-white rounded-2xl flex-1 outline-none text-xs md:text-sm text-center font-bold px-3" required onchange="renderLogPreview()">
-                                <select id="report-dc" class="bg-appcard border border-white/10 text-white rounded-2xl flex-1 outline-none text-xs md:text-sm text-center font-bold font-apple uppercase tracking-widest cursor-pointer px-3" onchange="renderLogPreview()">
-                                    <option value="ALL">ALL DC</option>
-                                </select>
-                            </div>
-                            <button onclick="downloadPDF('print-log', 'FFI_LogReport')" class="w-full md:w-auto bg-appgreen text-black font-extrabold px-6 py-4 rounded-2xl btn-tactile shadow-[0_0_20px_rgba(52,199,89,0.3)] flex justify-center items-center gap-2 text-xs md:text-sm uppercase tracking-widest hover:scale-[0.98] transition-transform">
-                                <i class="fa-solid fa-download text-lg"></i> <span class="md:hidden ml-1">DOWNLOAD PDF</span>
-                            </button>
-                        </div>
-                        <p class="text-[9px] md:text-xs text-gray-500 text-center uppercase tracking-widest font-bold">⬇️ Preview Laporan Asli ⬇️</p>
-                        
-                        <div class="a4-wrapper" id="wrap-print-log">
-                            <div id="print-log" class="a4-paper">
-                                <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #E5E7EB; padding-bottom: 15px;">
-                                    <h1 style="font-size: 24px; font-weight: 900; margin:0; color:#2B65F6; letter-spacing: 1px;">DATABASE LOG REPORT</h1>
-                                    <p style="margin: 5px 0 0 0; color: #6B7280; font-size: 14px;" id="rep-log-period">Periode Pembukuan: -</p>
-                                </div>
-                                <div id="rep-log-content"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <div id="rep-view-log" class="hidden-tab space-y-6">
+                        <div class="flex flex-col md:flex-row gap-3 md:gap-4 max-w-3xl mx-auto w-full">
+                            <div class="flex gap-3 flex-1">
+                                <input type="month" id="report-month" class="bg-appcard border border-white/10 text-white rounded-2xl flex-1 outline-none text-xs md:text-sm text-center font-bold px-3" required onchange="renderLogPreview()">
+                                <select id="report-dc" class="bg-appcard border border-white/10 text-white rounded-2xl flex-1 outline-none text-xs md:text-sm text-center font-bold font-apple uppercase tracking-widest cursor-pointer px-3" onchange="renderLogPreview()">
+                                    <option value="ALL">ALL DC</option>
+                                </select>
+                            </div>
+                            <button onclick="downloadPDF('print-log', 'FFI_LogReport')" class="w-full md:w-auto bg-appgreen text-black font-extrabold px-6 py-4 rounded-2xl btn-tactile shadow-[0_0_20px_rgba(52,199,89,0.3)] flex justify-center items-center gap-2 text-xs md:text-sm uppercase tracking-widest hover:scale-[0.98] transition-transform">
+                                <i class="fa-solid fa-download text-lg"></i> <span class="md:hidden ml-1">DOWNLOAD PDF</span>
+                            </button>
+                        </div>
+                        <p class="text-[9px] md:text-xs text-gray-500 text-center uppercase tracking-widest font-bold">⬇️ Preview Laporan Asli ⬇️</p>
+                        
+                        <div class="a4-wrapper" id="wrap-print-log">
+                            <div id="print-log" class="a4-paper">
+                                <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #E5E7EB; padding-bottom: 15px;">
+                                    <h1 style="font-size: 24px; font-weight: 900; margin:0; color:#2B65F6; letter-spacing: 1px;">DATABASE LOG REPORT</h1>
+                                    <p style="margin: 5px 0 0 0; color: #6B7280; font-size: 14px;" id="rep-log-period">Periode Pembukuan: -</p>
+                                </div>
+                                <div id="rep-log-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <div id="tab-log" class="hidden-tab p-6 md:p-10 animate-fade-in-up">
-                    <div class="flex flex-col gap-6 md:gap-8 max-w-4xl mx-auto w-full">
-                        <div class="flex gap-3 md:gap-4 max-w-3xl mx-auto w-full items-stretch">
-                            <input type="text" id="search-po" placeholder="Cari ID / DC..." class="text-base bg-appcard border border-white/10 flex-1 rounded-2xl px-5 py-3.5 md:py-4 outline-none transition-all focus:border-appapplered focus:shadow-[0_0_15px_rgba(255,59,48,0.2)]" onkeyup="filterLogLocal()">
-                            <button type="button" onclick="loadLogPO()" id="btn-sync-log" class="bg-appapplered text-white w-16 md:w-20 rounded-2xl flex justify-center items-center btn-tactile shadow-glow-redorange hover:scale-[0.96] transition-transform h-auto"><i class="fa-solid fa-rotate-right text-lg"></i></button>
-                        </div>
-                        <div id="log-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 pb-20"></div>
-                    </div>
-                </div>
+                <div id="tab-log" class="hidden-tab p-6 md:p-10 animate-fade-in-up">
+                    <div class="flex flex-col gap-6 md:gap-8 max-w-4xl mx-auto w-full">
+                        <div class="flex gap-3 md:gap-4 max-w-3xl mx-auto w-full items-stretch">
+                            <input type="text" id="search-po" placeholder="Cari ID / DC..." class="text-base bg-appcard border border-white/10 flex-1 rounded-2xl px-5 py-3.5 md:py-4 outline-none transition-all focus:border-appapplered focus:shadow-[0_0_15px_rgba(255,59,48,0.2)]" onkeyup="filterLogLocal()">
+                            <button type="button" onclick="loadLogPO()" id="btn-sync-log" class="bg-appapplered text-white w-16 md:w-20 rounded-2xl flex justify-center items-center btn-tactile shadow-glow-redorange hover:scale-[0.96] transition-transform h-auto"><i class="fa-solid fa-rotate-right text-lg"></i></button>
+                        </div>
+                        <div id="log-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 pb-20"></div>
+                    </div>
+                </div>
 
-                <div id="tab-forms" class="hidden-tab p-6 md:p-10 animate-fade-in-up">
-                    <div class="max-w-4xl mx-auto w-full space-y-7 md:space-y-10">
-                        
-                        <div class="flex bg-appcard p-1.5 md:p-2 rounded-2xl md:rounded-3xl border border-white/7 shadow-xl">
-                            <button type="button" onclick="switchForm('po')" id="btn-form-po" class="flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appapplered text-white shadow-glow-redorange">New PO</button>
-                            <button type="button" onclick="switchForm('sales')" id="btn-form-sales" class="flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all text-gray-500 bg-transparent">Sales</button>
-                            <button type="button" onclick="switchForm('stock')" id="btn-form-stock" class="flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all text-gray-500 bg-transparent">Stock</button>
-                        </div>
+                <div id="tab-forms" class="hidden-tab p-6 md:p-10 animate-fade-in-up">
+                    <div class="max-w-4xl mx-auto w-full space-y-7 md:space-y-10">
+                        
+                        <div class="flex bg-appcard p-1.5 md:p-2 rounded-2xl md:rounded-3xl border border-white/7 shadow-xl">
+                            <button type="button" onclick="switchForm('po')" id="btn-form-po" class="flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appapplered text-white shadow-glow-redorange">New PO</button>
+                            <button type="button" onclick="switchForm('sales')" id="btn-form-sales" class="flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all text-gray-500 bg-transparent">Sales</button>
+                            <button type="button" onclick="switchForm('stock')" id="btn-form-stock" class="flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all text-gray-500 bg-transparent">Stock</button>
+                        </div>
 
-                        <form id="form-po" onsubmit="submitAction(event, 'insert_po')" class="space-y-6 md:space-y-8 bg-appcard p-6 md:p-12 rounded-4xl border border-white/7 shadow-glow-redorange transition-shadow hover:shadow-[0_0_30px_rgba(255,59,48,0.4)]">
-                            <div class="space-y-3.5 md:space-y-5">
-                                <input type="text" id="po-id" placeholder="ID PO (CTH: JKT01...)" required class="uppercase bg-appbg w-full h-14 md:h-[60px] md:text-lg px-6">
-                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3.5 md:gap-5">
-                                    <input type="text" id="po-tanggal" list="date-recom" autocomplete="off" placeholder="Tgl PO" required class="bg-appbg w-full h-14 md:h-[60px] md:text-lg px-6">
-                                    <input type="text" id="po-exp" list="date-recom" autocomplete="off" placeholder="Tgl EXP" required class="bg-appbg w-full h-14 md:h-[60px] md:text-lg px-6">
-                                    <div class="relative cursor-pointer btn-tactile col-span-2 md:col-span-1 h-14 md:h-[60px]" onclick="openDCModal('po-dc')">
-                                        <input type="text" id="po-dc" placeholder="PILIH NAMA DC" required readonly class="pointer-events-none uppercase bg-appapplered/10 border border-appapplered/30 text-appapplered w-full h-full md:text-lg px-6">
-                                        <div class="absolute right-5 top-1/2 -translate-y-1/2 text-appapplered text-xl">🔍</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pt-6 md:pt-10 border-t border-white/7">
-                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-widest mb-4 md:mb-6">Kuantitas PO (Ctn)</p>
-                                <div class="grid grid-cols-2 md:grid-cols-5 gap-3.5 md:gap-5">
-                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appapplered focus-within:shadow-[0_0_20px_rgba(255,59,48,0.35)] focus-within:bg-[#1A0505]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NKA</label>
-                                        <input type="number" id="po-nka" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appapplered focus-within:shadow-[0_0_20px_rgba(255,59,48,0.35)] focus-within:bg-[#1A0505]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NDLH</label>
-                                        <input type="number" id="po-ndlh" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appapplered focus-within:shadow-[0_0_20px_rgba(255,59,48,0.35)] focus-within:bg-[#1A0505]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NRD</label>
-                                        <input type="number" id="po-nrd" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appapplered focus-within:shadow-[0_0_20px_rgba(255,59,48,0.35)] focus-within:bg-[#1A0505]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NARR</label>
-                                        <input type="number" id="po-narr" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                    <div class="col-span-2 md:col-span-1 bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appapplered focus-within:shadow-[0_0_20px_rgba(255,59,48,0.35)] focus-within:bg-[#1A0505]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NKACH</label>
-                                        <input type="number" id="po-nkach" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="w-full bg-appapplered text-white font-extrabold py-4 md:py-5 rounded-2xl btn-tactile shadow-glow-redorange text-sm md:text-base tracking-widest mt-6 md:mt-8 hover:scale-[0.98] transition-transform">SUBMIT PO</button>
-                        </form>
+                        <form id="form-po" onsubmit="submitAction(event, 'insert_po')" class="space-y-6 md:space-y-8 bg-appcard p-6 md:p-12 rounded-4xl border border-white/7 shadow-glow-redorange transition-shadow hover:shadow-[0_0_30px_rgba(255,59,48,0.4)]">
+                            <div class="space-y-3.5 md:space-y-5">
+                                <input type="text" id="po-id" placeholder="ID PO (CTH: JKT01...)" required class="uppercase bg-appbg w-full h-14 md:h-[60px] md:text-lg px-6">
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3.5 md:gap-5">
+                                    <input type="text" id="po-tanggal" list="date-recom" autocomplete="off" placeholder="Tgl PO" required class="bg-appbg w-full h-14 md:h-[60px] md:text-lg px-6">
+                                    <input type="text" id="po-exp" list="date-recom" autocomplete="off" placeholder="Tgl EXP" required class="bg-appbg w-full h-14 md:h-[60px] md:text-lg px-6">
+                                    <div class="relative cursor-pointer btn-tactile col-span-2 md:col-span-1 h-14 md:h-[60px]" onclick="openDCModal('po-dc')">
+                                        <input type="text" id="po-dc" placeholder="PILIH NAMA DC" required readonly class="pointer-events-none uppercase bg-appapplered/10 border border-appapplered/30 text-appapplered w-full h-full md:text-lg px-6">
+                                        <div class="absolute right-5 top-1/2 -translate-y-1/2 text-appapplered text-xl">🔍</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-6 md:pt-10 border-t border-white/7">
+                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-widest mb-4 md:mb-6">Kuantitas PO (Ctn)</p>
+                                <div class="grid grid-cols-2 md:grid-cols-5 gap-3.5 md:gap-5">
+                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appapplered focus-within:shadow-[0_0_20px_rgba(255,59,48,0.35)] focus-within:bg-[#1A0505]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NKA</label>
+                                        <input type="number" id="po-nka" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appapplered focus-within:shadow-[0_0_20px_rgba(255,59,48,0.35)] focus-within:bg-[#1A0505]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NDLH</label>
+                                        <input type="number" id="po-ndlh" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appapplered focus-within:shadow-[0_0_20px_rgba(255,59,48,0.35)] focus-within:bg-[#1A0505]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NRD</label>
+                                        <input type="number" id="po-nrd" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appapplered focus-within:shadow-[0_0_20px_rgba(255,59,48,0.35)] focus-within:bg-[#1A0505]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NARR</label>
+                                        <input type="number" id="po-narr" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                    <div class="col-span-2 md:col-span-1 bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appapplered focus-within:shadow-[0_0_20px_rgba(255,59,48,0.35)] focus-within:bg-[#1A0505]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NKACH</label>
+                                        <input type="number" id="po-nkach" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full bg-appapplered text-white font-extrabold py-4 md:py-5 rounded-2xl btn-tactile shadow-glow-redorange text-sm md:text-base tracking-widest mt-6 md:mt-8 hover:scale-[0.98] transition-transform">SUBMIT PO</button>
+                        </form>
 
-                        <form id="form-sales" onsubmit="submitAction(event, 'insert_sales')" class="hidden-tab space-y-6 md:space-y-8 bg-appcard p-6 md:p-12 rounded-4xl border border-white/7 transition-shadow hover:shadow-[0_0_25px_rgba(173,216,230,0.2)]">
-                            <div class="space-y-3.5 md:space-y-5">
-                                <input type="text" id="sls-id" list="recent-po-ids" autocomplete="off" placeholder="ID PO DATABASE" required class="uppercase bg-appbg w-full h-14 md:h-[60px] md:text-lg px-6">
-                            </div>
-                            <div class="pt-6 md:pt-10 border-t border-white/7">
-                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-widest mb-4 md:mb-6">Realisasi Sales (Ctn)</p>
-                                <div class="grid grid-cols-2 md:grid-cols-5 gap-3.5 md:gap-5">
-                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appappleblue focus-within:shadow-[0_0_20px_rgba(173,216,230,0.35)] focus-within:bg-[#05101A]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NKA</label>
-                                        <input type="number" id="sls-nka" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appappleblue focus-within:shadow-[0_0_20px_rgba(173,216,230,0.35)] focus-within:bg-[#05101A]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NDLH</label>
-                                        <input type="number" id="sls-ndlh" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appappleblue focus-within:shadow-[0_0_20px_rgba(173,216,230,0.35)] focus-within:bg-[#05101A]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NRD</label>
-                                        <input type="number" id="sls-nrd" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appappleblue focus-within:shadow-[0_0_20px_rgba(173,216,230,0.35)] focus-within:bg-[#05101A]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NARR</label>
-                                        <input type="number" id="sls-narr" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                    <div class="col-span-2 md:col-span-1 bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appappleblue focus-within:shadow-[0_0_20px_rgba(173,216,230,0.35)] focus-within:bg-[#05101A]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NKACH</label>
-                                        <input type="number" id="sls-nkach" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="w-full bg-appappleblue text-black font-extrabold py-4 md:py-5 rounded-2xl btn-tactile shadow-glow-lightblue text-sm md:text-base tracking-widest mt-6 md:mt-8 hover:scale-[0.98] transition-transform">UPDATE SALES</button>
-                        </form>
+                        <form id="form-sales" onsubmit="submitAction(event, 'insert_sales')" class="hidden-tab space-y-6 md:space-y-8 bg-appcard p-6 md:p-12 rounded-4xl border border-white/7 transition-shadow hover:shadow-[0_0_25px_rgba(173,216,230,0.2)]">
+                            <div class="space-y-3.5 md:space-y-5">
+                                <input type="text" id="sls-id" list="recent-po-ids" autocomplete="off" placeholder="ID PO DATABASE" required class="uppercase bg-appbg w-full h-14 md:h-[60px] md:text-lg px-6">
+                            </div>
+                            <div class="pt-6 md:pt-10 border-t border-white/7">
+                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-widest mb-4 md:mb-6">Realisasi Sales (Ctn)</p>
+                                <div class="grid grid-cols-2 md:grid-cols-5 gap-3.5 md:gap-5">
+                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appappleblue focus-within:shadow-[0_0_20px_rgba(173,216,230,0.35)] focus-within:bg-[#05101A]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NKA</label>
+                                        <input type="number" id="sls-nka" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appappleblue focus-within:shadow-[0_0_20px_rgba(173,216,230,0.35)] focus-within:bg-[#05101A]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NDLH</label>
+                                        <input type="number" id="sls-ndlh" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appappleblue focus-within:shadow-[0_0_20px_rgba(173,216,230,0.35)] focus-within:bg-[#05101A]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NRD</label>
+                                        <input type="number" id="sls-nrd" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appappleblue focus-within:shadow-[0_0_20px_rgba(173,216,230,0.35)] focus-within:bg-[#05101A]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NARR</label>
+                                        <input type="number" id="sls-narr" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                    <div class="col-span-2 md:col-span-1 bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appappleblue focus-within:shadow-[0_0_20px_rgba(173,216,230,0.35)] focus-within:bg-[#05101A]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NKACH</label>
+                                        <input type="number" id="sls-nkach" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full bg-appappleblue text-black font-extrabold py-4 md:py-5 rounded-2xl btn-tactile shadow-glow-lightblue text-sm md:text-base tracking-widest mt-6 md:mt-8 hover:scale-[0.98] transition-transform">UPDATE SALES</button>
+                        </form>
 
-                        <form id="form-stock" onsubmit="submitAction(event, 'insert_stock')" class="hidden-tab space-y-6 md:space-y-8 bg-appcard p-6 md:p-12 rounded-4xl border border-white/7 transition-shadow hover:shadow-[0_0_25px_rgba(52,199,89,0.2)]">
-                            <div class="space-y-3.5 md:space-y-5">
-                                <input type="text" id="stk-tanggal" list="date-recom" autocomplete="off" placeholder="Tanggal (DD/MM/YYYY)" required class="bg-appbg w-full h-14 md:h-[60px] md:text-lg px-6">
-                            </div>
-                            <div class="pt-6 md:pt-10 border-t border-white/7">
-                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-widest mb-4 md:mb-6">Fisik Stock (Ctn)</p>
-                                <div class="grid grid-cols-2 md:grid-cols-5 gap-3.5 md:gap-5">
-                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appgreen focus-within:shadow-[0_0_20px_rgba(52,199,89,0.35)] focus-within:bg-[#051A0A]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NKA</label>
-                                        <input type="number" id="stk-nka" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appgreen focus-within:shadow-[0_0_20px_rgba(52,199,89,0.35)] focus-within:bg-[#051A0A]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NDLH</label>
-                                        <input type="number" id="stk-ndlh" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appgreen focus-within:shadow-[0_0_20px_rgba(52,199,89,0.35)] focus-within:bg-[#051A0A]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NRD</label>
-                                        <input type="number" id="stk-nrd" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appgreen focus-within:shadow-[0_0_20px_rgba(52,199,89,0.35)] focus-within:bg-[#051A0A]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NARR</label>
-                                        <input type="number" id="stk-narr" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                    <div class="col-span-2 md:col-span-1 bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appgreen focus-within:shadow-[0_0_20px_rgba(52,199,89,0.35)] focus-within:bg-[#051A0A]">
-                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NKACH</label>
-                                        <input type="number" id="stk-nkach" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="w-full bg-appgreen text-black font-extrabold py-4 md:py-5 rounded-2xl btn-tactile shadow-[0_0_15px_rgba(52,199,89,0.2)] text-sm md:text-base tracking-widest mt-6 md:mt-8 hover:scale-[0.98] transition-transform">UPDATE STOCK</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                        <form id="form-stock" onsubmit="submitAction(event, 'insert_stock')" class="hidden-tab space-y-6 md:space-y-8 bg-appcard p-6 md:p-12 rounded-4xl border border-white/7 transition-shadow hover:shadow-[0_0_25px_rgba(52,199,89,0.2)]">
+                            <div class="space-y-3.5 md:space-y-5">
+                                <input type="text" id="stk-tanggal" list="date-recom" autocomplete="off" placeholder="Tanggal (DD/MM/YYYY)" required class="bg-appbg w-full h-14 md:h-[60px] md:text-lg px-6">
+                            </div>
+                            <div class="pt-6 md:pt-10 border-t border-white/7">
+                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-widest mb-4 md:mb-6">Fisik Stock (Ctn)</p>
+                                <div class="grid grid-cols-2 md:grid-cols-5 gap-3.5 md:gap-5">
+                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appgreen focus-within:shadow-[0_0_20px_rgba(52,199,89,0.35)] focus-within:bg-[#051A0A]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NKA</label>
+                                        <input type="number" id="stk-nka" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appgreen focus-within:shadow-[0_0_20px_rgba(52,199,89,0.35)] focus-within:bg-[#051A0A]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NDLH</label>
+                                        <input type="number" id="stk-ndlh" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appgreen focus-within:shadow-[0_0_20px_rgba(52,199,89,0.35)] focus-within:bg-[#051A0A]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NRD</label>
+                                        <input type="number" id="stk-nrd" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                    <div class="bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appgreen focus-within:shadow-[0_0_20px_rgba(52,199,89,0.35)] focus-within:bg-[#051A0A]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NARR</label>
+                                        <input type="number" id="stk-narr" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                    <div class="col-span-2 md:col-span-1 bg-black/50 p-4 md:p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center transition-all focus-within:border-appgreen focus-within:shadow-[0_0_20px_rgba(52,199,89,0.35)] focus-within:bg-[#051A0A]">
+                                        <label class="text-[9px] md:text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1 md:mb-2 pointer-events-none">NKACH</label>
+                                        <input type="number" id="stk-nkach" value="0" required class="sku-input w-full text-3xl md:text-[2.5rem] leading-none text-white h-10 md:h-12">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full bg-appgreen text-black font-extrabold py-4 md:py-5 rounded-2xl btn-tactile shadow-[0_0_15px_rgba(52,199,89,0.2)] text-sm md:text-base tracking-widest mt-6 md:mt-8 hover:scale-[0.98] transition-transform">UPDATE STOCK</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-            <div class="fixed bottom-0 md:bottom-8 w-full max-w-md md:max-w-[700px] bg-[#000000]/92 backdrop-blur-xl border-t md:border border-white/7 pt-3 pb-6 md:py-3 px-4 md:px-10 flex justify-between items-center z-50 rounded-t-4xl md:rounded-[3rem] shadow-[0_-15px_40px_rgba(0,0,0,0.6)] left-1/2 -translate-x-1/2">
-                <button type="button" onclick="switchMainTab('tab-analytics', this)" class="nav-item flex-1 flex flex-col items-center gap-1.5 text-appapplered transition-all btn-tactile group">
-                    <i class="fa-solid fa-chart-simple text-2xl drop-shadow-[0_0_8px_rgba(255,59,48,0.3)] group-hover:scale-110 transition-transform"></i>
-                    <span class="text-[8px] md:text-[10px] mt-0.5 font-extrabold uppercase tracking-widest">Analytic</span>
-                </button>
-                <button type="button" onclick="switchMainTab('tab-report', this)" class="nav-item flex-1 flex flex-col items-center gap-1.5 text-gray-600 transition-all btn-tactile group">
-                    <i class="fa-solid fa-file-pdf text-2xl group-hover:scale-110 transition-transform"></i>
-                    <span class="text-[8px] md:text-[10px] mt-0.5 font-extrabold uppercase tracking-widest">Report</span>
-                </button>
-                <div class="relative -top-8 md:-top-5 animate-fade-in-up flex-shrink-0 px-2 md:px-6">
-                    <button type="button" onclick="switchMainTab('tab-forms', this)" class="nav-item bg-white text-black h-16 md:h-18 w-16 md:w-18 rounded-full flex justify-center items-center shadow-[0_0_25px_rgba(255,255,255,0.4)] btn-tactile border-[6px] md:border-[7px] border-[#000000] hover:scale-105 transition-transform">
-                        <i class="fa-solid fa-plus text-2xl md:text-3xl"></i>
-                    </button>
-                </div>
-                <button type="button" onclick="switchMainTab('tab-log', this)" class="nav-item flex-1 flex flex-col items-center gap-1.5 text-gray-600 transition-all btn-tactile group">
-                    <i class="fa-solid fa-database text-2xl group-hover:scale-110 transition-transform"></i>
-                    <span class="text-[8px] md:text-[10px] mt-0.5 font-extrabold uppercase tracking-widest">Data</span>
-                </button>
-                <button type="button" onclick="logout()" class="nav-item flex-1 flex flex-col items-center gap-1.5 text-gray-600 transition-all btn-tactile group">
-                    <i class="fa-solid fa-arrow-right-from-bracket text-2xl group-hover:scale-110 transition-transform"></i>
-                    <span class="text-[8px] md:text-[10px] mt-0.5 font-extrabold uppercase tracking-widest">Logout</span>
-                </button>
-            </div>
-        </div>
-    </div>
+            <div class="fixed bottom-0 md:bottom-8 w-full max-w-md md:max-w-[700px] bg-[#000000]/92 backdrop-blur-xl border-t md:border border-white/7 pt-3 pb-6 md:py-3 px-4 md:px-10 flex justify-between items-center z-50 rounded-t-4xl md:rounded-[3rem] shadow-[0_-15px_40px_rgba(0,0,0,0.6)] left-1/2 -translate-x-1/2">
+                <button type="button" onclick="switchMainTab('tab-analytics', this)" class="nav-item flex-1 flex flex-col items-center gap-1.5 text-appapplered transition-all btn-tactile group">
+                    <i class="fa-solid fa-chart-simple text-2xl drop-shadow-[0_0_8px_rgba(255,59,48,0.3)] group-hover:scale-110 transition-transform"></i>
+                    <span class="text-[8px] md:text-[10px] mt-0.5 font-extrabold uppercase tracking-widest">Analytic</span>
+                </button>
+                <button type="button" onclick="switchMainTab('tab-report', this)" class="nav-item flex-1 flex flex-col items-center gap-1.5 text-gray-600 transition-all btn-tactile group">
+                    <i class="fa-solid fa-file-pdf text-2xl group-hover:scale-110 transition-transform"></i>
+                    <span class="text-[8px] md:text-[10px] mt-0.5 font-extrabold uppercase tracking-widest">Report</span>
+                </button>
+                <div class="relative -top-8 md:-top-5 animate-fade-in-up flex-shrink-0 px-2 md:px-6">
+                    <button type="button" onclick="switchMainTab('tab-forms', this)" class="nav-item bg-white text-black h-16 md:h-18 w-16 md:w-18 rounded-full flex justify-center items-center shadow-[0_0_25px_rgba(255,255,255,0.4)] btn-tactile border-[6px] md:border-[7px] border-[#000000] hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-plus text-2xl md:text-3xl"></i>
+                    </button>
+                </div>
+                <button type="button" onclick="switchMainTab('tab-log', this)" class="nav-item flex-1 flex flex-col items-center gap-1.5 text-gray-600 transition-all btn-tactile group">
+                    <i class="fa-solid fa-database text-2xl group-hover:scale-110 transition-transform"></i>
+                    <span class="text-[8px] md:text-[10px] mt-0.5 font-extrabold uppercase tracking-widest">Data</span>
+                </button>
+                <button type="button" onclick="logout()" class="nav-item flex-1 flex flex-col items-center gap-1.5 text-gray-600 transition-all btn-tactile group">
+                    <i class="fa-solid fa-arrow-right-from-bracket text-2xl group-hover:scale-110 transition-transform"></i>
+                    <span class="text-[8px] md:text-[10px] mt-0.5 font-extrabold uppercase tracking-widest">Logout</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
-    <script>
-        const WEBHOOK_URL = "https://n8n-mzbmiib3etk4.kangkung.sumopod.my.id/webhook/ff-indonesia-api";
-        let activeLogData = []; let globalForecastData = []; let globalDiagnoseData = []; let targetDCInput = "";
-        let chartBarInstance = null; let chartPieInstance = null;
-        
-        // DC LIST AUTO SORT A-Z UPDATE FINAL (Include Kotabumi, Palangkaraya & Revisi Berebek)
-        const DC_LIST = ["BALARAJA DEPO", "BALARAJA SAT", "BALI", "BANDUNG 1", "BANDUNG 2", "BANJARMASIN", "BATAM", "BEKASI", "BEREBEK", "BOGOR", "CIANJUR", "CIKOKOL", "CILACAP", "CILEUNGSI", "GORONTALO", "JAMBI", "JEMBER", "KARAWANG", "KLATEN", "KOTABUMI", "LAMPUNG", "LOMBOK", "LUWU", "MADIUN", "MAKASSAR", "MALANG", "MANADO", "MEDAN", "PALANGKARAYA", "PALEMBANG", "PARUNG", "PEKANBARU", "PLUMBON", "PONTIANAK", "REMBANG", "SEMARANG", "SERANG", "SIDOARJO", "TEGAL"].sort();
+    <script>
+        const WEBHOOK_URL = "https://n8n-mzbmiib3etk4.kangkung.sumopod.my.id/webhook/ff-indonesia-api";
+        let activeLogData = []; let globalForecastData = []; let globalDiagnoseData = []; let targetDCInput = "";
+        let chartBarInstance = null; let chartPieInstance = null;
+        
+        // DC LIST AUTO SORT A-Z UPDATE FINAL (Include Kotabumi, Palangkaraya & Revisi Berebek)
+        const DC_LIST = ["BALARAJA DEPO", "BALARAJA SAT", "BALI", "BANDUNG 1", "BANDUNG 2", "BANJARMASIN", "BATAM", "BEKASI", "BEREBEK", "BOGOR", "CIANJUR", "CIKOKOL", "CILACAP", "CILEUNGSI", "GORONTALO", "JAMBI", "JEMBER", "KARAWANG", "KLATEN", "KOTABUMI", "LAMPUNG", "LOMBOK", "LUWU", "MADIUN", "MAKASSAR", "MALANG", "MANADO", "MEDAN", "PALANGKARAYA", "PALEMBANG", "PARUNG", "PEKANBARU", "PLUMBON", "PONTIANAK", "REMBANG", "SEMARANG", "SERANG", "SIDOARJO", "TEGAL"].sort();
 
-        window.onload = () => {
-            const d = new Date(); const currMonth = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2, '0')}`;
-            document.getElementById('report-month').value = currMonth;
-            document.getElementById('analytic-month').value = currMonth;
-            
-            const savedUser = localStorage.getItem('ffi_user');
-            if(savedUser) {
-                document.getElementById('view-login').classList.add('hidden-tab'); document.getElementById('view-main').classList.remove('hidden-tab');
-                document.getElementById('header-username').innerText = savedUser;
-                initDateRecommendations(); updateMonthHeaders(); initDCPicker(); initReportDCPicker(); loadAnalytics(); loadLogPO(); 
-            }
-        };
+        window.onload = () => {
+            const d = new Date(); const currMonth = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2, '0')}`;
+            document.getElementById('report-month').value = currMonth;
+            document.getElementById('analytic-month').value = currMonth;
+            
+            const savedUser = localStorage.getItem('ffi_user');
+            if(savedUser) {
+                document.getElementById('view-login').classList.add('hidden-tab'); document.getElementById('view-main').classList.remove('hidden-tab');
+                document.getElementById('header-username').innerText = savedUser;
+                initDateRecommendations(); updateMonthHeaders(); initDCPicker(); initReportDCPicker(); loadAnalytics(); loadLogPO(); 
+            }
+        };
 
-        function initReportDCPicker() {
-            const sel = document.getElementById('report-dc');
-            if(sel && sel.options.length <= 1) {
-                DC_LIST.forEach(dc => { sel.innerHTML += `<option value="${dc}">${dc}</option>`; });
-            }
-        }
+        function initReportDCPicker() {
+            const sel = document.getElementById('report-dc');
+            if(sel && sel.options.length <= 1) {
+                DC_LIST.forEach(dc => { sel.innerHTML += `<option value="${dc}">${dc}</option>`; });
+            }
+        }
 
-        function initDateRecommendations() {
-            const dl = document.getElementById('date-recom'); if(!dl) return; dl.innerHTML = ''; const today = new Date();
-            for(let i=0; i<=3; i++) {
-                const d = new Date(today); d.setDate(d.getDate() - i);
-                const dd = String(d.getDate()).padStart(2, '0'); const mm = String(d.getMonth() + 1).padStart(2, '0'); const yyyy = d.getFullYear();
-                dl.innerHTML += `<option value="${dd}/${mm}/${yyyy}">`;
-            }
-        }
+        function initDateRecommendations() {
+            const dl = document.getElementById('date-recom'); if(!dl) return; dl.innerHTML = ''; const today = new Date();
+            for(let i=0; i<=3; i++) {
+                const d = new Date(today); d.setDate(d.getDate() - i);
+                const dd = String(d.getDate()).padStart(2, '0'); const mm = String(d.getMonth() + 1).padStart(2, '0'); const yyyy = d.getFullYear();
+                dl.innerHTML += `<option value="${dd}/${mm}/${yyyy}">`;
+            }
+        }
 
-        function updateMonthHeaders() {
-            const months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]; const d = new Date();
-            const elBuffer = document.getElementById('th-buffer'); const elForecast = document.getElementById('th-forecast');
-            if(elBuffer) elBuffer.innerHTML = `BUFFER<br>(${months[d.getMonth()]})`; if(elForecast) elForecast.innerHTML = `FORECAST<br>(${months[(d.getMonth() + 1) % 12]})`;
-        }
+        function updateMonthHeaders() {
+            const months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]; const d = new Date();
+            const elBuffer = document.getElementById('th-buffer'); const elForecast = document.getElementById('th-forecast');
+            if(elBuffer) elBuffer.innerHTML = `BUFFER<br>(${months[d.getMonth()]})`; if(elForecast) elForecast.innerHTML = `FORECAST<br>(${months[(d.getMonth() + 1) % 12]})`;
+        }
 
-        function getSkeletonHTML(count, isList = false) {
-            if(isList) return Array(count).fill(`<div class="skeleton-box rounded-[1.6rem] h-20 w-full mb-3.5"></div>`).join('');
-            return Array(count).fill(`<div class="skeleton-box rounded-xl h-10 w-full mb-1.5"></div>`).join('');
-        }
+        function getSkeletonHTML(count, isList = false) {
+            if(isList) return Array(count).fill(`<div class="skeleton-box rounded-[1.6rem] h-20 w-full mb-3.5"></div>`).join('');
+            return Array(count).fill(`<div class="skeleton-box rounded-xl h-10 w-full mb-1.5"></div>`).join('');
+        }
 
-        function runTicker(el, endVal) {
-            if(!el) return; let startT = null, duration = 800;
-            function step(t) {
-                if(!startT) startT = t; let prog = Math.min((t - startT) / duration, 1); el.innerText = Math.floor(prog * endVal);
-                if(prog < 1) window.requestAnimationFrame(step); else el.innerText = endVal;
-            } window.requestAnimationFrame(step);
-        }
+        function runTicker(el, endVal) {
+            if(!el) return; let startT = null, duration = 800;
+            function step(t) {
+                if(!startT) startT = t; let prog = Math.min((t - startT) / duration, 1); el.innerText = Math.floor(prog * endVal);
+                if(prog < 1) window.requestAnimationFrame(step); else el.innerText = endVal;
+            } window.requestAnimationFrame(step);
+        }
 
-        function showToast(msg, isError = false) {
-            const t = document.getElementById('toast'); if(!t) return;
-            document.getElementById('toast-msg').innerText = msg; document.getElementById('toast-icon').innerText = isError ? '❌' : '✅';
-            t.className = `fixed top-5 left-1/2 -translate-x-1/2 z-[100] px-7 py-3 rounded-full font-extrabold text-sm flex items-center gap-3 w-max max-w-[90%] transition-transform duration-300 border-2 ${isError ? 'bg-[#3A0000] border-appred text-appred shadow-[0_0_20px_rgba(255,59,48,0.4)]' : 'bg-appcard border-appgreen text-white shadow-[0_0_20px_rgba(52,199,89,0.3)]'}`;
-            if(!isError && (msg.includes("Login") || msg.includes("Akses") || msg.includes("Mencetak"))) t.classList.replace('border-appgreen', 'border-appappleorange');
-            t.classList.add('toast-show'); setTimeout(() => t.classList.remove('toast-show'), 3000);
-        }
+        function showToast(msg, isError = false) {
+            const t = document.getElementById('toast'); if(!t) return;
+            document.getElementById('toast-msg').innerText = msg; document.getElementById('toast-icon').innerText = isError ? '❌' : '✅';
+            t.className = `fixed top-5 left-1/2 -translate-x-1/2 z-[100] px-7 py-3 rounded-full font-extrabold text-sm flex items-center gap-3 w-max max-w-[90%] transition-transform duration-300 border-2 ${isError ? 'bg-[#3A0000] border-appred text-appred shadow-[0_0_20px_rgba(255,59,48,0.4)]' : 'bg-appcard border-appgreen text-white shadow-[0_0_20px_rgba(52,199,89,0.3)]'}`;
+            if(!isError && (msg.includes("Login") || msg.includes("Akses") || msg.includes("Mencetak"))) t.classList.replace('border-appgreen', 'border-appappleorange');
+            t.classList.add('toast-show'); setTimeout(() => t.classList.remove('toast-show'), 3000);
+        }
 
-        async function sendApi(payload, btnElement = null, originalText = "") {
-            if(btnElement) { btnElement.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`; btnElement.classList.add('opacity-50', 'pointer-events-none'); }
-            try {
-                const res = await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                const textData = await res.text(); let data;
-                try { data = JSON.parse(textData); } catch(err) { data = { status: "error", message: textData }; }
-                if(btnElement) { btnElement.innerHTML = originalText; btnElement.classList.remove('opacity-50', 'pointer-events-none'); }
-                return Array.isArray(data) ? data[0] : data;
-            } catch (e) {
-                if(btnElement) { btnElement.innerHTML = originalText; btnElement.classList.remove('opacity-50', 'pointer-events-none'); }
-                showToast("Koneksi Server Error", true); return null;
-            }
-        }
+        async function sendApi(payload, btnElement = null, originalText = "") {
+            if(btnElement) { btnElement.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`; btnElement.classList.add('opacity-50', 'pointer-events-none'); }
+            try {
+                const res = await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                const textData = await res.text(); let data;
+                try { data = JSON.parse(textData); } catch(err) { data = { status: "error", message: textData }; }
+                if(btnElement) { btnElement.innerHTML = originalText; btnElement.classList.remove('opacity-50', 'pointer-events-none'); }
+                return Array.isArray(data) ? data[0] : data;
+            } catch (e) {
+                if(btnElement) { btnElement.innerHTML = originalText; btnElement.classList.remove('opacity-50', 'pointer-events-none'); }
+                showToast("Koneksi Server Error", true); return null;
+            }
+        }
 
-        async function handleLogin(e) {
-            e.preventDefault(); const btn = document.getElementById('btn-login'); const user = document.getElementById('login-user').value; const pass = document.getElementById('login-pass').value;
-            const res = await sendApi({ action: "login", user_id: user, password: pass }, btn, "MASUK SISTEM");
-            if (res && res.status === "success") {
-                localStorage.setItem('ffi_user', res.user_id || user); showToast("Akses Diberikan!");
-                document.getElementById('view-login').classList.add('hidden-tab'); document.getElementById('view-main').classList.remove('hidden-tab'); document.getElementById('header-username').innerText = res.user_id || user;
-                initDateRecommendations(); updateMonthHeaders(); initDCPicker(); initReportDCPicker(); loadAnalytics(); loadLogPO();
-            } else showToast(res ? res.message : "Akses Ditolak", true);
-        }
+        async function handleLogin(e) {
+            e.preventDefault(); const btn = document.getElementById('btn-login'); const user = document.getElementById('login-user').value; const pass = document.getElementById('login-pass').value;
+            const res = await sendApi({ action: "login", user_id: user, password: pass }, btn, "MASUK SISTEM");
+            if (res && res.status === "success") {
+                localStorage.setItem('ffi_user', res.user_id || user); showToast("Akses Diberikan!");
+                document.getElementById('view-login').classList.add('hidden-tab'); document.getElementById('view-main').classList.remove('hidden-tab'); document.getElementById('header-username').innerText = res.user_id || user;
+                initDateRecommendations(); updateMonthHeaders(); initDCPicker(); initReportDCPicker(); loadAnalytics(); loadLogPO();
+            } else showToast(res ? res.message : "Akses Ditolak", true);
+        }
 
-        function logout() { localStorage.removeItem('ffi_user'); location.reload(); }
+        function logout() { localStorage.removeItem('ffi_user'); location.reload(); }
 
-        function initDCPicker() {
-            const grid = document.getElementById('dc-grid');
-            if(grid) { grid.innerHTML = DC_LIST.map(dc => `<button type="button" onclick="selectDC('${dc}')" class="bg-appcard border border-white/5 text-gray-300 text-[10px] md:text-xs font-extrabold py-5 rounded-2xl btn-tactile hover:border-appapplered hover:text-appapplered transition-all uppercase tracking-wider">${dc}</button>`).join(''); }
-        }
-        function openDCModal(id) { targetDCInput = id; document.getElementById('modal-dc').classList.remove('hidden-tab'); }
-        function closeDCModal() { document.getElementById('modal-dc').classList.add('hidden-tab'); }
-        function selectDC(dc) { document.getElementById(targetDCInput).value = dc; closeDCModal(); }
+        function initDCPicker() {
+            const grid = document.getElementById('dc-grid');
+            if(grid) { grid.innerHTML = DC_LIST.map(dc => `<button type="button" onclick="selectDC('${dc}')" class="bg-appcard border border-white/5 text-gray-300 text-[10px] md:text-xs font-extrabold py-5 rounded-2xl btn-tactile hover:border-appapplered hover:text-appapplered transition-all uppercase tracking-wider">${dc}</button>`).join(''); }
+        }
+        function openDCModal(id) { targetDCInput = id; document.getElementById('modal-dc').classList.remove('hidden-tab'); }
+        function closeDCModal() { document.getElementById('modal-dc').classList.add('hidden-tab'); }
+        function selectDC(dc) { document.getElementById(targetDCInput).value = dc; closeDCModal(); }
 
-        function switchMainTab(tabId, element) {
-            try {
-                ['tab-analytics', 'tab-report', 'tab-log', 'tab-forms'].forEach(id => { const el = document.getElementById(id); if(el) el.classList.add('hidden-tab'); });
-                const targetEl = document.getElementById(tabId); if(targetEl) targetEl.classList.remove('hidden-tab');
-                document.querySelectorAll('.nav-item').forEach(el => { 
-                    if(el.classList.contains('w-16') || el.classList.contains('w-18')) return; 
-                    el.classList.replace('text-appapplered', 'text-gray-600'); el.classList.replace('text-appappleblue', 'text-gray-600'); el.classList.replace('text-appgreen', 'text-gray-600');
-                });
-                if(element && !element.classList.contains('w-16') && !element.classList.contains('w-18')) { 
-                    const colorClass = (tabId === 'tab-analytics') ? 'text-appapplered' : (tabId === 'tab-report') ? 'text-appappleblue' : (tabId === 'tab-log') ? 'text-appgreen' : 'text-gray-600';
-                    element.classList.replace('text-gray-600', colorClass); 
-                }
-                if(tabId === 'tab-report') { renderAnalyticPreview(); renderLogPreview(); } 
-            } catch(e) { console.error(e); }
-        }
+        function switchMainTab(tabId, element) {
+            try {
+                ['tab-analytics', 'tab-report', 'tab-log', 'tab-forms'].forEach(id => { const el = document.getElementById(id); if(el) el.classList.add('hidden-tab'); });
+                const targetEl = document.getElementById(tabId); if(targetEl) targetEl.classList.remove('hidden-tab');
+                document.querySelectorAll('.nav-item').forEach(el => { 
+                    if(el.classList.contains('w-16') || el.classList.contains('w-18')) return; 
+                    el.classList.replace('text-appapplered', 'text-gray-600'); el.classList.replace('text-appappleblue', 'text-gray-600'); el.classList.replace('text-appgreen', 'text-gray-600');
+                });
+                if(element && !element.classList.contains('w-16') && !element.classList.contains('w-18')) { 
+                    const colorClass = (tabId === 'tab-analytics') ? 'text-appapplered' : (tabId === 'tab-report') ? 'text-appappleblue' : (tabId === 'tab-log') ? 'text-appgreen' : 'text-gray-600';
+                    element.classList.replace('text-gray-600', colorClass); 
+                }
+                if(tabId === 'tab-report') { renderAnalyticPreview(); renderLogPreview(); } 
+            } catch(e) { console.error(e); }
+        }
 
-        function switchForm(formType) {
-            try {
-                ['form-po', 'form-sales', 'form-stock'].forEach(id => { 
-                    const el = document.getElementById('form-' + id); 
-                    if(el) el.classList.add('hidden-tab'); 
-                });
-                const fTarget = document.getElementById('form-' + formType); 
-                if(fTarget) fTarget.classList.remove('hidden-tab');
-                
-                ['btn-form-po', 'btn-form-sales', 'btn-form-stock'].forEach(id => { 
-                    const btn = document.getElementById(id); 
-                    if(btn) btn.className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all text-gray-500 bg-transparent"; 
-                });
-                
-                const activeBtn = document.getElementById('btn-form-' + formType);
-                if(activeBtn) {
-                    if(formType === 'po') activeBtn.className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appapplered text-white shadow-glow-redorange";
-                    if(formType === 'sales') activeBtn.className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appappleblue text-black shadow-glow-lightblue";
-                    if(formType === 'stock') activeBtn.className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appgreen text-black shadow-[0_0_15px_rgba(52,199,89,0.3)]";
-                }
-            } catch(e) { console.error(e); }
-        }
+        function switchForm(formType) {
+            try {
+                ['form-po', 'form-sales', 'form-stock'].forEach(id => { 
+                    const el = document.getElementById('form-' + id); 
+                    if(el) el.classList.add('hidden-tab'); 
+                });
+                const fTarget = document.getElementById('form-' + formType); 
+                if(fTarget) fTarget.classList.remove('hidden-tab');
+                
+                ['btn-form-po', 'btn-form-sales', 'btn-form-stock'].forEach(id => { 
+                    const btn = document.getElementById(id); 
+                    if(btn) btn.className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all text-gray-500 bg-transparent"; 
+                });
+                
+                const activeBtn = document.getElementById('btn-form-' + formType);
+                if(activeBtn) {
+                    if(formType === 'po') activeBtn.className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appapplered text-white shadow-glow-redorange";
+                    if(formType === 'sales') activeBtn.className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appappleblue text-black shadow-glow-lightblue";
+                    if(formType === 'stock') activeBtn.className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appgreen text-black shadow-[0_0_15px_rgba(52,199,89,0.3)]";
+                }
+            } catch(e) { console.error(e); }
+        }
 
-        function switchReportView(type) {
-            document.getElementById('rep-view-analytic').classList.add('hidden-tab');
-            document.getElementById('rep-view-log').classList.add('hidden-tab');
-            document.getElementById('btn-rep-analytic').className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all text-gray-500 bg-transparent";
-            document.getElementById('btn-rep-log').className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all text-gray-500 bg-transparent";
-            if(type === 'analytic') {
-                document.getElementById('rep-view-analytic').classList.remove('hidden-tab');
-                document.getElementById('btn-rep-analytic').className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appappleblue text-black shadow-glow-lightblue";
-                renderAnalyticPreview();
-            } else {
-                document.getElementById('rep-view-log').classList.remove('hidden-tab');
-                document.getElementById('btn-rep-log').className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appgreen text-black shadow-[0_0_15px_rgba(52,199,89,0.3)]";
-                renderLogPreview();
-            }
-        }
+        function switchReportView(type) {
+            document.getElementById('rep-view-analytic').classList.add('hidden-tab');
+            document.getElementById('rep-view-log').classList.add('hidden-tab');
+            document.getElementById('btn-rep-analytic').className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all text-gray-500 bg-transparent";
+            document.getElementById('btn-rep-log').className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all text-gray-500 bg-transparent";
+            if(type === 'analytic') {
+                document.getElementById('rep-view-analytic').classList.remove('hidden-tab');
+                document.getElementById('btn-rep-analytic').className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appappleblue text-black shadow-glow-lightblue";
+                renderAnalyticPreview();
+            } else {
+                document.getElementById('rep-view-log').classList.remove('hidden-tab');
+                document.getElementById('btn-rep-log').className = "flex-1 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-extrabold uppercase transition-all bg-appgreen text-black shadow-[0_0_15px_rgba(52,199,89,0.3)]";
+                renderLogPreview();
+            }
+        }
 
-        async function loadAnalytics() {
-            const fCont = document.getElementById('forecast-container'); const dCont = document.getElementById('diagnosa-container'); const btn = document.getElementById('btn-sync-analytics'); const origText = btn.innerHTML;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`; btn.classList.add('opacity-50', 'pointer-events-none');
-            if(fCont) fCont.innerHTML = getSkeletonHTML(5, false); 
-            if(dCont) dCont.innerHTML = getSkeletonHTML(4, true);
-            try {
-                const [reqBuffer, reqDiag] = await Promise.allSettled([ fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: "load_buffer" }) }), fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: "load_diagnose" }) }) ]);
-                if(fCont) fCont.innerHTML = ''; let skuCount = 0; globalForecastData = [];
-                if(reqBuffer.status === 'fulfilled') {
-                    const textBuffer = await reqBuffer.value.text(); let rawBuffer; try { rawBuffer = JSON.parse(textBuffer); } catch(e) { rawBuffer = []; } if(rawBuffer.data) rawBuffer = rawBuffer.data; 
-                    const forecastRows = Array.isArray(rawBuffer) ? rawBuffer : [rawBuffer];
-                    forecastRows.forEach((item, idx) => {
-                        const row = item.json ? item.json : item; const vals = Object.values(row); let skuName = row.col_2 || row["Nama SKU"] || vals[1] || "";
-                        if(!skuName || String(skuName).toUpperCase().includes("NAMA SKU") || String(skuName).includes("col_")) return;
-                        const demandBulat = Math.round(Number(row.col_3 || row["Avg. Demand 3 Bulanan"] || vals[2] || 0)); const forecastBulat = Math.round(Number(row.col_4 || row["FORECAST PO"] || vals[3] || 0)); const bufferBulat = Math.round(Number(row.col_5 || row["BUFFER"] || vals[4] || 0)); const statusText = String(row.col_6 || row["STATUS"] || vals[5] || "");
-                        globalForecastData.push({ sku: skuName, demand: demandBulat, po: forecastBulat, buffer: bufferBulat, status: statusText });
-                        skuCount++; const dot = statusText.includes("CRITICAL") ? '<span class="h-2.5 w-2.5 rounded-full bg-appred shadow-[0_0_8px_#FF3B30] inline-block animate-pulse"></span>' : '<span class="h-2.5 w-2.5 rounded-full bg-appgreen shadow-[0_0_8px_#34C759] inline-block"></span>';
-                        if(fCont) { fCont.innerHTML += `<div class="grid grid-cols-5 gap-1.5 items-center py-3 border-b border-white/5 text-[10px] md:text-xs text-center animate-fade-in-up" style="animation-delay: ${idx * 40}ms; opacity:0"><div class="font-extrabold text-left text-white px-1 uppercase truncate min-w-0">${skuName}</div><div class="text-gray-400 font-bold">${demandBulat}</div><div class="text-white font-black">${forecastBulat}</div><div class="text-white font-black">${bufferBulat}</div><div class="flex justify-center items-center">${dot}</div></div>`; }
-                    });
-                } runTicker(document.getElementById('stat-sku'), skuCount);
-                if(dCont) dCont.innerHTML = ''; let dcIssueCount = 0; globalDiagnoseData = [];
-                if(reqDiag.status === 'fulfilled') {
-                    const textDiag = await reqDiag.value.text(); let rawDiag; try { rawDiag = JSON.parse(textDiag); } catch(e) { rawDiag = []; } if(rawDiag.data) rawDiag = rawDiag.data; 
-                    const diagRows = Array.isArray(rawDiag) ? rawDiag : [rawDiag];
-                    diagRows.forEach((item, idx) => {
-                        const row = item.json ? item.json : item; const vals = Object.values(row); let dcName = row["DC"] || row.col_2 || vals[1] || "";
-                        if(!dcName || String(dcName).toUpperCase() === "DC" || String(dcName).includes("col_")) return;
-                        const failCount = Number(row["WAREHOUSE FAILURE"] || row.col_3 || vals[2] || 0); const moqCount = Number(row["UNDER MOQ"] || row.col_5 || vals[4] || 0); const resStr = String(row["DIAGNOSE RESULTS (DR)"] || row.col_9 || vals[8] || "N/A").toUpperCase();
-                        const total = failCount + moqCount; if(total > 0 || dcName !== "N/A") dcIssueCount++; const failPct = total > 0 ? Math.round((failCount / total) * 100) : 0; const moqPct = total > 0 ? Math.round((moqCount / total) * 100) : 0;
-                        if(dcName !== "N/A") globalDiagnoseData.push({ dc: dcName, failPct: failPct, moqPct: moqPct, res: resStr });
-                        if(dCont) { dCont.innerHTML += `<div class="bg-appcard p-5 md:p-6 rounded-4xl border border-white/7 animate-fade-in-up" style="animation-delay: ${idx * 40}ms; opacity:0"><div class="flex justify-between items-center mb-4 md:mb-5"><h4 class="text-sm md:text-base font-black text-white uppercase tracking-tight truncate w-32 md:w-48">${dcName}</h4><p class="text-[8px] md:text-[10px] font-bold ${resStr.includes('FAILURE') ? 'text-appred' : 'text-appappleorange'} tracking-widest bg-black px-3 py-1.5 rounded-md border border-white/7">⚠️ ${resStr}</p></div><div class="grid grid-cols-3 gap-1.5 text-center bg-black/50 p-3 md:p-4 rounded-2xl border border-white/7"><div class="border-r border-white/10"><p class="text-[7px] md:text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1.5">WH Failure</p><p class="text-xs md:text-sm font-black text-appred">${failPct}%</p></div><div class="border-r border-white/10"><p class="text-[7px] md:text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1.5">Under MOQ</p><p class="text-xs md:text-sm font-black text-appappleorange">${moqPct}%</p></div><div><p class="text-[7px] md:text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1.5">Above MOQ</p><p class="text-xs md:text-sm font-black text-appgreen">0%</p></div></div></div>`; }
-                    });
-                } runTicker(document.getElementById('stat-dc'), dcIssueCount);
-                renderAnalyticPreview(); 
-            } catch (err) { showToast("Gagal Sync Data", true); } finally { if(btn) { btn.innerHTML = origText; btn.classList.remove('opacity-50', 'pointer-events-none'); } }
-        }
+        async function loadAnalytics() {
+            const fCont = document.getElementById('forecast-container'); const dCont = document.getElementById('diagnosa-container'); const btn = document.getElementById('btn-sync-analytics'); const origText = btn.innerHTML;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`; btn.classList.add('opacity-50', 'pointer-events-none');
+            if(fCont) fCont.innerHTML = getSkeletonHTML(5, false); 
+            if(dCont) dCont.innerHTML = getSkeletonHTML(4, true);
+            try {
+                const [reqBuffer, reqDiag] = await Promise.allSettled([ fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: "load_buffer" }) }), fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: "load_diagnose" }) }) ]);
+                if(fCont) fCont.innerHTML = ''; let skuCount = 0; globalForecastData = [];
+                if(reqBuffer.status === 'fulfilled') {
+                    const textBuffer = await reqBuffer.value.text(); let rawBuffer; try { rawBuffer = JSON.parse(textBuffer); } catch(e) { rawBuffer = []; } if(rawBuffer.data) rawBuffer = rawBuffer.data; 
+                    const forecastRows = Array.isArray(rawBuffer) ? rawBuffer : [rawBuffer];
+                    forecastRows.forEach((item, idx) => {
+                        const row = item.json ? item.json : item; const vals = Object.values(row); let skuName = row.col_2 || row["Nama SKU"] || vals[1] || "";
+                        if(!skuName || String(skuName).toUpperCase().includes("NAMA SKU") || String(skuName).includes("col_")) return;
+                        const demandBulat = Math.round(Number(row.col_3 || row["Avg. Demand 3 Bulanan"] || vals[2] || 0)); const forecastBulat = Math.round(Number(row.col_4 || row["FORECAST PO"] || vals[3] || 0)); const bufferBulat = Math.round(Number(row.col_5 || row["BUFFER"] || vals[4] || 0)); const statusText = String(row.col_6 || row["STATUS"] || vals[5] || "");
+                        globalForecastData.push({ sku: skuName, demand: demandBulat, po: forecastBulat, buffer: bufferBulat, status: statusText });
+                        skuCount++; const dot = statusText.includes("CRITICAL") ? '<span class="h-2.5 w-2.5 rounded-full bg-appred shadow-[0_0_8px_#FF3B30] inline-block animate-pulse"></span>' : '<span class="h-2.5 w-2.5 rounded-full bg-appgreen shadow-[0_0_8px_#34C759] inline-block"></span>';
+                        if(fCont) { fCont.innerHTML += `<div class="grid grid-cols-5 gap-1.5 items-center py-3 border-b border-white/5 text-[10px] md:text-xs text-center animate-fade-in-up" style="animation-delay: ${idx * 40}ms; opacity:0"><div class="font-extrabold text-left text-white px-1 uppercase truncate min-w-0">${skuName}</div><div class="text-gray-400 font-bold">${demandBulat}</div><div class="text-white font-black">${forecastBulat}</div><div class="text-white font-black">${bufferBulat}</div><div class="flex justify-center items-center">${dot}</div></div>`; }
+                    });
+                } runTicker(document.getElementById('stat-sku'), skuCount);
+                if(dCont) dCont.innerHTML = ''; let dcIssueCount = 0; globalDiagnoseData = [];
+                if(reqDiag.status === 'fulfilled') {
+                    const textDiag = await reqDiag.value.text(); let rawDiag; try { rawDiag = JSON.parse(textDiag); } catch(e) { rawDiag = []; } if(rawDiag.data) rawDiag = rawDiag.data; 
+                    const diagRows = Array.isArray(rawDiag) ? rawDiag : [rawDiag];
+                    diagRows.forEach((item, idx) => {
+                        const row = item.json ? item.json : item; const vals = Object.values(row); let dcName = row["DC"] || row.col_2 || vals[1] || "";
+                        if(!dcName || String(dcName).toUpperCase() === "DC" || String(dcName).includes("col_")) return;
+                        const failCount = Number(row["WAREHOUSE FAILURE"] || row.col_3 || vals[2] || 0); const moqCount = Number(row["UNDER MOQ"] || row.col_5 || vals[4] || 0); const resStr = String(row["DIAGNOSE RESULTS (DR)"] || row.col_9 || vals[8] || "N/A").toUpperCase();
+                        const total = failCount + moqCount; if(total > 0 || dcName !== "N/A") dcIssueCount++; const failPct = total > 0 ? Math.round((failCount / total) * 100) : 0; const moqPct = total > 0 ? Math.round((moqCount / total) * 100) : 0;
+                        if(dcName !== "N/A") globalDiagnoseData.push({ dc: dcName, failPct: failPct, moqPct: moqPct, res: resStr });
+                        if(dCont) { dCont.innerHTML += `<div class="bg-appcard p-5 md:p-6 rounded-4xl border border-white/7 animate-fade-in-up" style="animation-delay: ${idx * 40}ms; opacity:0"><div class="flex justify-between items-center mb-4 md:mb-5"><h4 class="text-sm md:text-base font-black text-white uppercase tracking-tight truncate w-32 md:w-48">${dcName}</h4><p class="text-[8px] md:text-[10px] font-bold ${resStr.includes('FAILURE') ? 'text-appred' : 'text-appappleorange'} tracking-widest bg-black px-3 py-1.5 rounded-md border border-white/7">⚠️ ${resStr}</p></div><div class="grid grid-cols-3 gap-1.5 text-center bg-black/50 p-3 md:p-4 rounded-2xl border border-white/7"><div class="border-r border-white/10"><p class="text-[7px] md:text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1.5">WH Failure</p><p class="text-xs md:text-sm font-black text-appred">${failPct}%</p></div><div class="border-r border-white/10"><p class="text-[7px] md:text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1.5">Under MOQ</p><p class="text-xs md:text-sm font-black text-appappleorange">${moqPct}%</p></div><div><p class="text-[7px] md:text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1.5">Above MOQ</p><p class="text-xs md:text-sm font-black text-appgreen">0%</p></div></div></div>`; }
+                    });
+                } runTicker(document.getElementById('stat-dc'), dcIssueCount);
+                renderAnalyticPreview(); 
+            } catch (err) { showToast("Gagal Sync Data", true); } finally { if(btn) { btn.innerHTML = origText; btn.classList.remove('opacity-50', 'pointer-events-none'); } }
+        }
 
-        async function loadLogPO() {
-            const btn = document.getElementById('btn-sync-log'); const cont = document.getElementById('log-container'); const dl = document.getElementById('recent-po-ids'); 
-            if(cont) cont.innerHTML = getSkeletonHTML(5, true);
-            const res = await sendApi({ action: "load_admin" }, btn, `<i class="fa-solid fa-rotate-right text-lg"></i>`);
-            if (res && res.status === "success") {
-                activeLogData = res.data || [];
-                if(dl) { dl.innerHTML = ''; let countID = 0; activeLogData.forEach(item => { if(item.ID && countID < 10 && !String(item["PO NKA"]).includes("BATAL")) { dl.innerHTML += `<option value="${item.ID}">`; countID++; } }); }
-                renderLogs(activeLogData); renderLogPreview(); renderAnalyticPreview();
-            }
-        }
+        async function loadLogPO() {
+            const btn = document.getElementById('btn-sync-log'); const cont = document.getElementById('log-container'); const dl = document.getElementById('recent-po-ids'); 
+            if(cont) cont.innerHTML = getSkeletonHTML(5, true);
+            const res = await sendApi({ action: "load_admin" }, btn, `<i class="fa-solid fa-rotate-right text-lg"></i>`);
+            if (res && res.status === "success") {
+                activeLogData = res.data || [];
+                if(dl) { dl.innerHTML = ''; let countID = 0; activeLogData.forEach(item => { if(item.ID && countID < 10 && !String(item["PO NKA"]).includes("BATAL")) { dl.innerHTML += `<option value="${item.ID}">`; countID++; } }); }
+                renderLogs(activeLogData); renderLogPreview(); renderAnalyticPreview();
+            }
+        }
 
-        function filterLogLocal() { const q = document.getElementById('search-po').value.toLowerCase(); renderLogs(activeLogData.filter(i => (i.ID && i.ID.toLowerCase().includes(q)) || (i.DC && i.DC.toLowerCase().includes(q)))); }
+        function filterLogLocal() { const q = document.getElementById('search-po').value.toLowerCase(); renderLogs(activeLogData.filter(i => (i.ID && i.ID.toLowerCase().includes(q)) || (i.DC && i.DC.toLowerCase().includes(q)))); }
 
-        // ================= FIX BUG: KARTU VOID MERAH GELAP =================
-        function renderLogs(data) {
-            const cont = document.getElementById('log-container'); if(!cont) return; cont.innerHTML = '';
-            data.forEach((item, idx) => {
-                if(!item.ID) return;
-                
-                const isBatalText = String(item["PO NKA"]).includes("BATAL");
-                const poQty = Number(item["TOTAL PO ctn"]) || 0; 
-                const salesQty = Number(item["Qty Terpenuhi (Kirim)"]) || 0;
-                
-                // Deteksi apabila Data Kosong/0 Keduanya (Dianggap Batal/Void)
-                const isCancelled = (poQty === 0 && salesQty === 0) || isBatalText;
+        // ================= FIX BUG: KARTU VOID MERAH GELAP =================
+        function renderLogs(data) {
+            const cont = document.getElementById('log-container'); if(!cont) return; cont.innerHTML = '';
+            data.forEach((item, idx) => {
+                if(!item.ID) return;
+                
+                const isBatalText = String(item["PO NKA"]).includes("BATAL");
+                const poQty = Number(item["TOTAL PO ctn"]) || 0; 
+                const salesQty = Number(item["Qty Terpenuhi (Kirim)"]) || 0;
+                
+                // Deteksi apabila Data Kosong/0 Keduanya (Dianggap Batal/Void)
+                const isCancelled = (poQty === 0 && salesQty === 0) || isBatalText;
 
-                let borderCol = "border-white/7", textCol = "text-appred", icon = "fa-circle-xmark", iconCol="text-appred";
-                let cardBg = "bg-appcard";
-                let statusBadge = "";
+                let borderCol = "border-white/7", textCol = "text-appred", icon = "fa-circle-xmark", iconCol="text-appred";
+                let cardBg = "bg-appcard";
+                let statusBadge = "";
 
-                if (isCancelled) {
-                    borderCol = "border-appred/80"; 
-                    cardBg = "bg-[#2A0505]"; 
-                    icon = "fa-ban"; 
-                    iconCol = "text-appred"; 
-                    textCol = "text-appred";
-                    statusBadge = `<div class="absolute top-3 right-3 bg-appapplered text-white text-[8px] font-black px-2 py-1 rounded-md tracking-widest shadow-glow-redorange z-10">VOID</div>`;
-                } else if (salesQty >= (poQty * 0.85)) { 
-                    borderCol = "border-appgreen/50"; textCol = "text-appgreen"; icon = "fa-circle-check"; iconCol="text-appgreen"; 
-                } else if (salesQty > 0) { 
-                    borderCol = "border-appappleorange/50"; textCol = "text-appappleorange"; icon = "fa-clock-rotate-left"; iconCol="text-appappleorange"; 
-                }
+                if (isCancelled) {
+                    borderCol = "border-appred/80"; 
+                    cardBg = "bg-[#2A0505]"; 
+                    icon = "fa-ban"; 
+                    iconCol = "text-appred"; 
+                    textCol = "text-appred";
+                    statusBadge = `<div class="absolute top-3 right-3 bg-appapplered text-white text-[8px] font-black px-2 py-1 rounded-md tracking-widest shadow-glow-redorange z-10">VOID</div>`;
+                } else if (salesQty >= (poQty * 0.85)) { 
+                    borderCol = "border-appgreen/50"; textCol = "text-appgreen"; icon = "fa-circle-check"; iconCol="text-appgreen"; 
+                } else if (salesQty > 0) { 
+                    borderCol = "border-appappleorange/50"; textCol = "text-appappleorange"; icon = "fa-clock-rotate-left"; iconCol="text-appappleorange"; 
+                }
 
-                cont.innerHTML += `<div class="${cardBg} rounded-4xl border ${borderCol} overflow-hidden transition-all duration-300 animate-fade-in-up relative" style="animation-delay: ${idx * 30}ms; opacity:0">
-                    ${statusBadge}
-                    <div class="p-6 flex items-center justify-between cursor-pointer btn-tactile hover:bg-white/5 transition-colors" onclick="toggleCard('${item.ID}')">
-                        <div class="flex items-center gap-5 w-2/3">
-                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-black flex items-center justify-center border border-white/7 flex-shrink-0 ${iconCol}">
-                                <i class="fa-solid ${icon} text-xl md:text-2xl drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]"></i>
-                            </div>
-                            <div class="min-w-0">
-                                <h4 class="font-black text-sm md:text-base ${isCancelled ? 'text-appred' : 'text-white'} uppercase tracking-tight truncate">${item.ID}</h4>
-                                <p class="text-[10px] md:text-[11px] text-gray-500 font-extrabold uppercase tracking-widest mt-1.5 truncate">${item.DC} • ${item["Tanggal PO"]}</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-[9px] md:text-[10px] text-gray-600 uppercase font-black tracking-widest mb-1">PO / SALES</p>
-                            <p class="text-base md:text-lg font-black ${textCol} leading-none">${poQty} <span class="text-gray-600 mx-0.5">/</span> ${salesQty}</p>
-                        </div>
-                    </div>
-                    <div id="det-${item.ID}" class="accordion-content bg-black/60 px-6 pb-6 pt-0">
-                        <div class="space-y-2 text-[11px] md:text-xs font-extrabold uppercase text-white pt-4">
-                            <div class="flex items-center justify-between bg-white/5 py-3 px-5 rounded-xl border border-white/7"><span class="w-14 md:w-20 text-gray-400">NKA</span><span class="flex-1 text-center text-gray-300">${item["PO NKA"] || 0}</span><span class="flex-1 text-center text-appappleblue">${item["NKA"] || 0}</span></div>
-                            <div class="flex items-center justify-between bg-white/5 py-3 px-5 rounded-xl border border-white/7"><span class="w-14 md:w-20 text-gray-400">NDLH</span><span class="flex-1 text-center text-gray-300">${item["PO NDLH"] || 0}</span><span class="flex-1 text-center text-appappleblue">${item["NDLH"] || 0}</span></div>
-                            <div class="flex items-center justify-between bg-white/5 py-3 px-5 rounded-xl border border-white/7"><span class="w-14 md:w-20 text-gray-400">NRD</span><span class="flex-1 text-center text-gray-300">${item["PO NRD"] || 0}</span><span class="flex-1 text-center text-appappleblue">${item["NRD"] || 0}</span></div>
-                            <div class="flex items-center justify-between bg-white/5 py-3 px-5 rounded-xl border border-white/7"><span class="w-14 md:w-20 text-gray-400">NARR</span><span class="flex-1 text-center text-gray-300">${item["PO NARR"] || 0}</span><span class="flex-1 text-center text-appappleblue">${item["NARR"] || 0}</span></div>
-                            <div class="flex items-center justify-between bg-white/5 py-3 px-5 rounded-xl border border-appappleblue/30"><span class="w-14 md:w-20 text-gray-400">NKACH</span><span class="flex-1 text-center text-gray-300">${item["PO NKACH"] || 0}</span><span class="flex-1 text-center text-appgreen">${item["NKACH"] || 0}</span></div>
-                        </div>
-                        <div class="flex justify-between items-center border-t border-white/7 pt-5 mt-5">
-                            <div><p class="text-[9px] md:text-[10px] text-gray-500 font-extrabold uppercase tracking-widest mb-1">GAP Pengiriman</p><p class="text-base md:text-lg font-black ${item["GAP"] == 0 ? 'text-appgreen' : 'text-appred'}">${item["GAP"] || 0} CTN</p></div>
-                            <button type="button" onclick="deletePO('${item.ID}')" class="bg-appred/10 text-appred border border-appred/30 font-extrabold text-[10px] md:text-xs py-3 px-6 rounded-xl btn-tactile hover:bg-appred hover:text-white transition-all uppercase tracking-widest ${isCancelled ? 'hidden-tab' : ''}"><i class="fa-solid fa-trash mr-2"></i>BATAL</button>
-                        </div>
-                    </div>
-                </div>`;
-            });
-        }
-        function toggleCard(id) { const el = document.getElementById('det-' + id); if(el) el.classList.toggle('accordion-expanded'); }
+                cont.innerHTML += `<div class="${cardBg} rounded-4xl border ${borderCol} overflow-hidden transition-all duration-300 animate-fade-in-up relative" style="animation-delay: ${idx * 30}ms; opacity:0">
+                    ${statusBadge}
+                    <div class="p-6 flex items-center justify-between cursor-pointer btn-tactile hover:bg-white/5 transition-colors" onclick="toggleCard('${item.ID}')">
+                        <div class="flex items-center gap-5 w-2/3">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-black flex items-center justify-center border border-white/7 flex-shrink-0 ${iconCol}">
+                                <i class="fa-solid ${icon} text-xl md:text-2xl drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <h4 class="font-black text-sm md:text-base ${isCancelled ? 'text-appred' : 'text-white'} uppercase tracking-tight truncate">${item.ID}</h4>
+                                <p class="text-[10px] md:text-[11px] text-gray-500 font-extrabold uppercase tracking-widest mt-1.5 truncate">${item.DC} • ${item["Tanggal PO"]}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[9px] md:text-[10px] text-gray-600 uppercase font-black tracking-widest mb-1">PO / SALES</p>
+                            <p class="text-base md:text-lg font-black ${textCol} leading-none">${poQty} <span class="text-gray-600 mx-0.5">/</span> ${salesQty}</p>
+                        </div>
+                    </div>
+                    <div id="det-${item.ID}" class="accordion-content bg-black/60 px-6 pb-6 pt-0">
+                        <div class="space-y-2 text-[11px] md:text-xs font-extrabold uppercase text-white pt-4">
+                            <div class="flex items-center justify-between bg-white/5 py-3 px-5 rounded-xl border border-white/7"><span class="w-14 md:w-20 text-gray-400">NKA</span><span class="flex-1 text-center text-gray-300">${item["PO NKA"] || 0}</span><span class="flex-1 text-center text-appappleblue">${item["NKA"] || 0}</span></div>
+                            <div class="flex items-center justify-between bg-white/5 py-3 px-5 rounded-xl border border-white/7"><span class="w-14 md:w-20 text-gray-400">NDLH</span><span class="flex-1 text-center text-gray-300">${item["PO NDLH"] || 0}</span><span class="flex-1 text-center text-appappleblue">${item["NDLH"] || 0}</span></div>
+                            <div class="flex items-center justify-between bg-white/5 py-3 px-5 rounded-xl border border-white/7"><span class="w-14 md:w-20 text-gray-400">NRD</span><span class="flex-1 text-center text-gray-300">${item["PO NRD"] || 0}</span><span class="flex-1 text-center text-appappleblue">${item["NRD"] || 0}</span></div>
+                            <div class="flex items-center justify-between bg-white/5 py-3 px-5 rounded-xl border border-white/7"><span class="w-14 md:w-20 text-gray-400">NARR</span><span class="flex-1 text-center text-gray-300">${item["PO NARR"] || 0}</span><span class="flex-1 text-center text-appappleblue">${item["NARR"] || 0}</span></div>
+                            <div class="flex items-center justify-between bg-white/5 py-3 px-5 rounded-xl border border-appappleblue/30"><span class="w-14 md:w-20 text-gray-400">NKACH</span><span class="flex-1 text-center text-gray-300">${item["PO NKACH"] || 0}</span><span class="flex-1 text-center text-appgreen">${item["NKACH"] || 0}</span></div>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-white/7 pt-5 mt-5">
+                            <div><p class="text-[9px] md:text-[10px] text-gray-500 font-extrabold uppercase tracking-widest mb-1">GAP Pengiriman</p><p class="text-base md:text-lg font-black ${item["GAP"] == 0 ? 'text-appgreen' : 'text-appred'}">${item["GAP"] || 0} CTN</p></div>
+                            <button type="button" onclick="deletePO('${item.ID}')" class="bg-appred/10 text-appred border border-appred/30 font-extrabold text-[10px] md:text-xs py-3 px-6 rounded-xl btn-tactile hover:bg-appred hover:text-white transition-all uppercase tracking-widest ${isCancelled ? 'hidden-tab' : ''}"><i class="fa-solid fa-trash mr-2"></i>BATAL</button>
+                        </div>
+                    </div>
+                </div>`;
+            });
+        }
+        function toggleCard(id) { const el = document.getElementById('det-' + id); if(el) el.classList.toggle('accordion-expanded'); }
 
-        async function deletePO(id) {
-            if(!confirm(`PERINGATAN: Batalkan PO ${id}?`)) return;
-            const res = await sendApi({ action: "delete", id: id });
-            if(res && res.status === "success") { showToast(`PO Dibatalkan`); loadLogPO(); } else showToast("Gagal membatalkan", true);
-        }
+        async function deletePO(id) {
+            if(!confirm(`PERINGATAN: Batalkan PO ${id}?`)) return;
+            const res = await sendApi({ action: "delete", id: id });
+            if(res && res.status === "success") { showToast(`PO Dibatalkan`); loadLogPO(); } else showToast("Gagal membatalkan", true);
+        }
 
-        async function submitAction(e, act) {
-            e.preventDefault();
-            try {
-                const btn = e.target.querySelector('button[type="submit"]'); let payload = { action: act }; const getVal = (id) => { const el = document.getElementById(id); return el ? el.value : ""; };
-                if(act === 'insert_po') { payload = { ...payload, id: getVal('po-id').toUpperCase(), tanggal_po: getVal('po-tanggal'), tanggal_exp: getVal('po-exp'), dc: getVal('po-dc').toUpperCase(), po_nka: getVal('po-nka'), po_ndlh: getVal('po-ndlh'), po_nrd: getVal('po-nrd'), po_narr: getVal('po-narr'), po_nkach: getVal('po-nkach') }; } 
-                else if(act === 'insert_sales') { payload = { ...payload, id: getVal('sls-id').toUpperCase(), nka: getVal('sls-nka'), ndlh: getVal('sls-ndlh'), nrd: getVal('sls-nrd'), narr: getVal('sls-narr'), nkach: getVal('sls-nkach') }; }
-                else if(act === 'insert_stock') { payload = { ...payload, tanggal: getVal('stk-tanggal'), nka: getVal('stk-nka'), ndlh: getVal('stk-ndlh'), nrd: getVal('stk-nrd'), narr: getVal('stk-narr'), nkach: getVal('stk-nkach') }; }
-                const res = await sendApi(payload, btn, btn.innerText);
-                if(res && res.status === "success") { showToast("Data Tersimpan!"); e.target.reset(); loadLogPO(); } else showToast("Gagal menyimpan data", true);
-            } catch(error) { showToast("Kesalahan Form Internal", true); }
-        }
+        async function submitAction(e, act) {
+            e.preventDefault();
+            try {
+                const btn = e.target.querySelector('button[type="submit"]'); let payload = { action: act }; const getVal = (id) => { const el = document.getElementById(id); return el ? el.value : ""; };
+                if(act === 'insert_po') { payload = { ...payload, id: getVal('po-id').toUpperCase(), tanggal_po: getVal('po-tanggal'), tanggal_exp: getVal('po-exp'), dc: getVal('po-dc').toUpperCase(), po_nka: getVal('po-nka'), po_ndlh: getVal('po-ndlh'), po_nrd: getVal('po-nrd'), po_narr: getVal('po-narr'), po_nkach: getVal('po-nkach') }; } 
+                else if(act === 'insert_sales') { payload = { ...payload, id: getVal('sls-id').toUpperCase(), nka: getVal('sls-nka'), ndlh: getVal('sls-ndlh'), nrd: getVal('sls-nrd'), narr: getVal('sls-narr'), nkach: getVal('sls-nkach') }; }
+                else if(act === 'insert_stock') { payload = { ...payload, tanggal: getVal('stk-tanggal'), nka: getVal('stk-nka'), ndlh: getVal('stk-ndlh'), nrd: getVal('stk-nrd'), narr: getVal('stk-narr'), nkach: getVal('stk-nkach') }; }
+                const res = await sendApi(payload, btn, btn.innerText);
+                if(res && res.status === "success") { showToast("Data Tersimpan!"); e.target.reset(); loadLogPO(); } else showToast("Gagal menyimpan data", true);
+            } catch(error) { showToast("Kesalahan Form Internal", true); }
+        }
 
-        function renderAnalyticPreview() {
-            const monthVal = document.getElementById('analytic-month').value;
-            let target1 = "", target2 = "", displayPeriod = "-";
-            
-            if(monthVal) {
-                const [year, monthStr] = monthVal.split('-');
-                const monthInt = parseInt(monthStr, 10); 
-                target1 = `${monthStr}/${year}`;    
-                target2 = `/${monthInt}/${year}`;   
-                displayPeriod = `Periode: ${monthStr} / ${year} (Histori) | Area: Inv. Real-Time`;
-            }
-            document.getElementById('report-date').innerText = displayPeriod;
+        function renderAnalyticPreview() {
+            const monthVal = document.getElementById('analytic-month').value;
+            let target1 = "", target2 = "", displayPeriod = "-";
+            
+            if(monthVal) {
+                const [year, monthStr] = monthVal.split('-');
+                const monthInt = parseInt(monthStr, 10); 
+                target1 = `${monthStr}/${year}`;    
+                target2 = `/${monthInt}/${year}`;   
+                displayPeriod = `Periode: ${monthStr} / ${year} (Histori) | Area: Inv. Real-Time`;
+            }
+            document.getElementById('report-date').innerText = displayPeriod;
 
-            let totPO = 0; let totSales = 0;
-            activeLogData.forEach(i => { 
-                const isBatalText = String(i["PO NKA"]).includes("BATAL");
-                const poQty = Number(i["TOTAL PO ctn"]) || 0; 
-                const salesQty = Number(i["Qty Terpenuhi (Kirim)"]) || 0;
-                // Exclude VOID from Analytic Sum
-                if(i.ID && !isBatalText && !(poQty === 0 && salesQty === 0)) { 
-                    const tgl = i["Tanggal PO"] || "";
-                    if(monthVal && !(tgl.includes(target1) || tgl.includes(target2))) return;
-                    totPO += poQty; 
-                    totSales += salesQty; 
-                } 
-            });
-            const fulfillPct = totPO > 0 ? Math.round((totSales/totPO)*100) : 0;
-            document.getElementById('rep-fulfill').innerText = `${fulfillPct}%`;
-            document.getElementById('rep-fulfill').style.color = fulfillPct >= 80 ? '#34C759' : '#FF9500';
+            let totPO = 0; let totSales = 0;
+            activeLogData.forEach(i => { 
+                const isBatalText = String(i["PO NKA"]).includes("BATAL");
+                const poQty = Number(i["TOTAL PO ctn"]) || 0; 
+                const salesQty = Number(i["Qty Terpenuhi (Kirim)"]) || 0;
+                // Exclude VOID from Analytic Sum
+                if(i.ID && !isBatalText && !(poQty === 0 && salesQty === 0)) { 
+                    const tgl = i["Tanggal PO"] || "";
+                    if(monthVal && !(tgl.includes(target1) || tgl.includes(target2))) return;
+                    totPO += poQty; 
+                    totSales += salesQty; 
+                } 
+            });
+            const fulfillPct = totPO > 0 ? Math.round((totSales/totPO)*100) : 0;
+            document.getElementById('rep-fulfill').innerText = `${fulfillPct}%`;
+            document.getElementById('rep-fulfill').style.color = fulfillPct >= 80 ? '#34C759' : '#FF9500';
 
-            let totDemand = 0; let totPOForecast = 0; let countCrit = 0; let countSafe = 0;
-            globalForecastData.forEach(i => { totDemand += i.demand; totPOForecast += i.po; if(i.status.includes("CRITICAL")) countCrit++; else countSafe++; });
-            
-            document.getElementById('rep-alert').innerText = countCrit > 0 ? "⚠️ BUTUH PERHATIAN" : "✅ STOK AMAN";
-            document.getElementById('rep-alert').style.color = countCrit > 0 ? '#FF3B30' : '#34C759';
-            
-            document.getElementById('rep-prod').innerHTML = `${totPO} <span style="font-size:16px; color:#9CA3AF;">/</span> ${totSales}`;
-            
-            document.getElementById('rep-inv-health').innerHTML = `<span style="color:#FF3B30;">${countCrit} Critical</span> <span style="color:#D1D5DB; margin: 0 10px;">|</span> <span style="color:#34C759;">${countSafe} Safe</span>`;
+            let totDemand = 0; let totPOForecast = 0; let countCrit = 0; let countSafe = 0;
+            globalForecastData.forEach(i => { totDemand += i.demand; totPOForecast += i.po; if(i.status.includes("CRITICAL")) countCrit++; else countSafe++; });
+            
+            document.getElementById('rep-alert').innerText = countCrit > 0 ? "⚠️ BUTUH PERHATIAN" : "✅ STOK AMAN";
+            document.getElementById('rep-alert').style.color = countCrit > 0 ? '#FF3B30' : '#34C759';
+            
+            // ================= FIX: LOGIKA & TAMPILAN VOLUME PO / SALES =================
+            document.getElementById('rep-prod').innerHTML = `${totPO} <span style="font-size:16px; color:#9CA3AF;">/</span> ${totSales}`;
+            
+            document.getElementById('rep-inv-health').innerHTML = `<span style="color:#FF3B30;">${countCrit} Critical</span> <span style="color:#D1D5DB; margin: 0 10px;">|</span> <span style="color:#34C759;">${countSafe} Safe</span>`;
 
-            if(chartBarInstance) chartBarInstance.destroy();
-            if(chartPieInstance) chartPieInstance.destroy();
+            if(chartBarInstance) chartBarInstance.destroy();
+            if(chartPieInstance) chartPieInstance.destroy();
 
-            const topSku = [...globalForecastData].sort((a,b) => b.demand - a.demand).slice(0, 5);
-            chartBarInstance = new Chart(document.getElementById('chartBar'), {
-                type: 'bar',
-                data: { labels: topSku.map(i => i.sku), datasets: [
-                    { label: 'Demand', data: topSku.map(i => i.demand), backgroundColor: '#ADD8E6' },
-                    { label: 'PO Target', data: topSku.map(i => i.po), backgroundColor: '#FF3B30' }
-                ]},
-                options: { animation: false, responsive: true }
-            });
+            const topSku = [...globalForecastData].sort((a,b) => b.demand - a.demand).slice(0, 5);
+            chartBarInstance = new Chart(document.getElementById('chartBar'), {
+                type: 'bar',
+                data: { labels: topSku.map(i => i.sku), datasets: [
+                    { label: 'Demand', data: topSku.map(i => i.demand), backgroundColor: '#ADD8E6' },
+                    { label: 'PO Target', data: topSku.map(i => i.po), backgroundColor: '#FF3B30' }
+                ]},
+                options: { animation: false, responsive: true }
+            });
 
-            let totFail = 0; let totMoq = 0;
-            globalDiagnoseData.forEach(i => { totFail += i.failPct; totMoq += i.moqPct; });
-            chartPieInstance = new Chart(document.getElementById('chartPie'), {
-                type: 'pie',
-                data: { labels: ['WH Failure', 'Under MOQ'], datasets: [{ data: [totFail, totMoq], backgroundColor: ['#FF3B30', '#FF9500'] }] },
-                options: { animation: false, responsive: true }
-            });
-        }
+            let totFail = 0; let totMoq = 0;
+            globalDiagnoseData.forEach(i => { totFail += i.failPct; totMoq += i.moqPct; });
+            chartPieInstance = new Chart(document.getElementById('chartPie'), {
+                type: 'pie',
+                data: { labels: ['WH Failure', 'Under MOQ'], datasets: [{ data: [totFail, totMoq], backgroundColor: ['#FF3B30', '#FF9500'] }] },
+                options: { animation: false, responsive: true }
+            });
+        }
 
-        function renderLogPreview() {
-            const monthVal = document.getElementById('report-month').value; 
-            const dcVal = document.getElementById('report-dc').value; 
-            const contentDiv = document.getElementById('rep-log-content');
-            if(!monthVal) return;
-            
-            const [year, monthStr] = monthVal.split('-');
-            const monthInt = parseInt(monthStr, 10); 
-            
-            const target1 = `${monthStr}/${year}`;    
-            const target2 = `/${monthInt}/${year}`;   
-            
-            const dcHeader = dcVal === "ALL" ? "ALL DC" : dcVal;
-            document.getElementById('rep-log-period').innerHTML = `${monthStr} / ${year} &nbsp;|&nbsp; AREA: <span style="color:#FF3B30;">${dcHeader}</span>`;
-            
-            let filteredLog = activeLogData.filter(i => {
-                if(!i.ID) return false;
-                const isBatalText = String(i["PO NKA"]).includes("BATAL");
-                const poQty = Number(i["TOTAL PO ctn"]) || 0; 
-                const salesQty = Number(i["Qty Terpenuhi (Kirim)"]) || 0;
-                
-                // Exclude VOID from Output Laporan Resmi
-                if (isBatalText || (poQty === 0 && salesQty === 0)) return false; 
-                
-                const tgl = i["Tanggal PO"] || "";
-                const matchMonth = tgl.includes(target1) || tgl.includes(target2);
-                const matchDC = (dcVal === "ALL") || (i.DC === dcVal);
-                return matchMonth && matchDC;
-            });
+        function renderLogPreview() {
+            const monthVal = document.getElementById('report-month').value; 
+            const dcVal = document.getElementById('report-dc').value; 
+            const contentDiv = document.getElementById('rep-log-content');
+            if(!monthVal) return;
+            
+            const [year, monthStr] = monthVal.split('-');
+            const monthInt = parseInt(monthStr, 10); 
+            
+            const target1 = `${monthStr}/${year}`;    
+            const target2 = `/${monthInt}/${year}`;   
+            
+            const dcHeader = dcVal === "ALL" ? "ALL DC" : dcVal;
+            document.getElementById('rep-log-period').innerHTML = `${monthStr} / ${year} &nbsp;|&nbsp; AREA: <span style="color:#FF3B30;">${dcHeader}</span>`;
+            
+            let filteredLog = activeLogData.filter(i => {
+                if(!i.ID) return false;
+                const isBatalText = String(i["PO NKA"]).includes("BATAL");
+                const poQty = Number(i["TOTAL PO ctn"]) || 0; 
+                const salesQty = Number(i["Qty Terpenuhi (Kirim)"]) || 0;
+                
+                // Exclude VOID from Output Laporan Resmi
+                if (isBatalText || (poQty === 0 && salesQty === 0)) return false; 
+                
+                const tgl = i["Tanggal PO"] || "";
+                const matchMonth = tgl.includes(target1) || tgl.includes(target2);
+                const matchDC = (dcVal === "ALL") || (i.DC === dcVal);
+                return matchMonth && matchDC;
+            });
 
-            // ================= FIX BUG: SORTING DATA A-Z PER DC =================
-            filteredLog.sort((a, b) => (a.DC || "").localeCompare(b.DC || ""));
+            // ================= FIX BUG: SORTING DATA A-Z PER DC =================
+            filteredLog.sort((a, b) => (a.DC || "").localeCompare(b.DC || ""));
 
-            if(filteredLog.length === 0) {
-                contentDiv.innerHTML = `<p style="text-align:center; padding: 20px; color:#999;">Tidak ada data untuk filter ini.</p>`;
-                return;
-            }
+            if(filteredLog.length === 0) {
+                contentDiv.innerHTML = `<p style="text-align:center; padding: 20px; color:#999;">Tidak ada data untuk filter ini.</p>`;
+                return;
+            }
 
-            let detailRows = '';
-            filteredLog.forEach(i => {
-                const poQty = Number(i["TOTAL PO ctn"]) || 0; const salesQty = Number(i["Qty Terpenuhi (Kirim)"]) || 0; const gap = i["GAP"] || 0;
-                detailRows += `<tr><td style="padding:10px; border-bottom:1px solid #E5E7EB; font-weight: bold;">${i.ID}</td><td style="padding:10px; border-bottom:1px solid #E5E7EB; color: #6B7280;">${i["Tanggal PO"]}</td><td style="padding:10px; border-bottom:1px solid #E5E7EB;">${i.DC}</td><td style="padding:10px; border-bottom:1px solid #E5E7EB; text-align:center;">${poQty}</td><td style="padding:10px; border-bottom:1px solid #E5E7EB; text-align:center;">${salesQty}</td><td style="padding:10px; border-bottom:1px solid #E5E7EB; text-align:center; font-weight:bold; color:${gap>0?'#FF3B30':'#34C759'};">${gap}</td></tr>`;
-            });
-            let detailTable = `
-                <h2 style="font-size:14px; font-weight:bold; margin-bottom:10px; color:#374151; text-transform:uppercase;">RINCIAN TRANSAKSI DETAIL</h2>
-                <table style="width:100%; border-collapse: collapse; font-size: 12px; text-align: left;">
-                    <thead><tr style="background:#F9FAFB; color: #374151; font-weight: 900;"><th style="padding:12px 10px; border-bottom:2px solid #D1D5DB;">ID PO</th><th style="padding:12px 10px; border-bottom:2px solid #D1D5DB;">TANGGAL</th><th style="padding:12px 10px; border-bottom:2px solid #D1D5DB;">DC</th><th style="padding:12px 10px; border-bottom:2px solid #D1D5DB; text-align:center;">PO (CTN)</th><th style="padding:12px 10px; border-bottom:2px solid #D1D5DB; text-align:center;">SALES</th><th style="padding:12px 10px; border-bottom:2px solid #D1D5DB; text-align:center;">GAP</th></tr></thead>
-                    <tbody>${detailRows}</tbody>
-                </table>
-            `;
+            let detailRows = '';
+            filteredLog.forEach(i => {
+                const poQty = Number(i["TOTAL PO ctn"]) || 0; const salesQty = Number(i["Qty Terpenuhi (Kirim)"]) || 0; const gap = i["GAP"] || 0;
+                detailRows += `<tr><td style="padding:10px; border-bottom:1px solid #E5E7EB; font-weight: bold;">${i.ID}</td><td style="padding:10px; border-bottom:1px solid #E5E7EB; color: #6B7280;">${i["Tanggal PO"]}</td><td style="padding:10px; border-bottom:1px solid #E5E7EB;">${i.DC}</td><td style="padding:10px; border-bottom:1px solid #E5E7EB; text-align:center;">${poQty}</td><td style="padding:10px; border-bottom:1px solid #E5E7EB; text-align:center;">${salesQty}</td><td style="padding:10px; border-bottom:1px solid #E5E7EB; text-align:center; font-weight:bold; color:${gap>0?'#FF3B30':'#34C759'};">${gap}</td></tr>`;
+            });
+            let detailTable = `
+                <h2 style="font-size:14px; font-weight:bold; margin-bottom:10px; color:#374151; text-transform:uppercase;">RINCIAN TRANSAKSI DETAIL</h2>
+                <table style="width:100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+                    <thead><tr style="background:#F9FAFB; color: #374151; font-weight: 900;"><th style="padding:12px 10px; border-bottom:2px solid #D1D5DB;">ID PO</th><th style="padding:12px 10px; border-bottom:2px solid #D1D5DB;">TANGGAL</th><th style="padding:12px 10px; border-bottom:2px solid #D1D5DB;">DC</th><th style="padding:12px 10px; border-bottom:2px solid #D1D5DB; text-align:center;">PO (CTN)</th><th style="padding:12px 10px; border-bottom:2px solid #D1D5DB; text-align:center;">SALES</th><th style="padding:12px 10px; border-bottom:2px solid #D1D5DB; text-align:center;">GAP</th></tr></thead>
+                    <tbody>${detailRows}</tbody>
+                </table>
+            `;
 
-            if (dcVal === "ALL") {
-                let summary = {};
-                filteredLog.forEach(i => {
-                    const dc = i.DC || "UNKNOWN";
-                    const poQty = Number(i["TOTAL PO ctn"]) || 0;
-                    const salesQty = Number(i["Qty Terpenuhi (Kirim)"]) || 0;
-                    let gapQty = Number(i["GAP"]);
-                    if(isNaN(gapQty)) gapQty = poQty - salesQty; 
+            if (dcVal === "ALL") {
+                let summary = {};
+                filteredLog.forEach(i => {
+                    const dc = i.DC || "UNKNOWN";
+                    const poQty = Number(i["TOTAL PO ctn"]) || 0;
+                    const salesQty = Number(i["Qty Terpenuhi (Kirim)"]) || 0;
+                    let gapQty = Number(i["GAP"]);
+                    if(isNaN(gapQty)) gapQty = poQty - salesQty; 
 
-                    if(!summary[dc]) summary[dc] = { po: 0, sales: 0, gap: 0 };
-                    summary[dc].po += poQty;
-                    summary[dc].sales += salesQty;
-                    summary[dc].gap += gapQty;
-                });
+                    if(!summary[dc]) summary[dc] = { po: 0, sales: 0, gap: 0 };
+                    summary[dc].po += poQty;
+                    summary[dc].sales += salesQty;
+                    summary[dc].gap += gapQty;
+                });
 
-                let sumRows = '';
-                // ================= SORTING TABEL SUMMARY A-Z =================
-                Object.keys(summary).sort().forEach(dc => {
-                    const s = summary[dc];
-                    sumRows += `<tr>
-                        <td style="padding:12px 10px; border-bottom:1px solid #E5E7EB; font-weight:bold; font-size:14px;">${dc}</td>
-                        <td style="padding:12px 10px; border-bottom:1px solid #E5E7EB; text-align:center; font-size:14px;">${s.po}</td>
-                        <td style="padding:12px 10px; border-bottom:1px solid #E5E7EB; text-align:center; font-size:14px;">${s.sales}</td>
-                        <td style="padding:12px 10px; border-bottom:1px solid #E5E7EB; text-align:center; font-weight:bold; font-size:14px; color:${s.gap>0?'#FF3B30':'#34C759'};">${s.gap}</td>
-                    </tr>`;
-                });
+                let sumRows = '';
+                // ================= SORTING TABEL SUMMARY A-Z =================
+                Object.keys(summary).sort().forEach(dc => {
+                    const s = summary[dc];
+                    sumRows += `<tr>
+                        <td style="padding:12px 10px; border-bottom:1px solid #E5E7EB; font-weight:bold; font-size:14px;">${dc}</td>
+                        <td style="padding:12px 10px; border-bottom:1px solid #E5E7EB; text-align:center; font-size:14px;">${s.po}</td>
+                        <td style="padding:12px 10px; border-bottom:1px solid #E5E7EB; text-align:center; font-size:14px;">${s.sales}</td>
+                        <td style="padding:12px 10px; border-bottom:1px solid #E5E7EB; text-align:center; font-weight:bold; font-size:14px; color:${s.gap>0?'#FF3B30':'#34C759'};">${s.gap}</td>
+                    </tr>`;
+                });
 
-                let sumTable = `
-                    <h2 style="font-size:16px; font-weight:bold; margin-bottom:10px; color:#FF3B30; text-transform:uppercase;">EXECUTIVE SUMMARY PER DC</h2>
-                    <table style="width:100%; border-collapse: collapse; font-size: 12px; text-align: left; margin-bottom: 30px;">
-                        <thead><tr style="background:#F9FAFB; color: #374151; font-weight: 900;">
-                            <th style="padding:12px 10px; border-bottom:2px solid #D1D5DB;">NAMA DC</th>
-                            <th style="padding:12px 10px; border-bottom:2px solid #D1D5DB; text-align:center;">TOTAL PO (CTN)</th>
-                            <th style="padding:12px 10px; border-bottom:2px solid #D1D5DB; text-align:center;">TOTAL SALES</th>
-                            <th style="padding:12px 10px; border-bottom:2px solid #D1D5DB; text-align:center;">TOTAL GAP</th>
-                        </tr></thead>
-                        <tbody>${sumRows}</tbody>
-                    </table>
-                    <div style="page-break-after: always; margin-bottom: 40px;"></div>
-                `;
-                contentDiv.innerHTML = sumTable + detailTable;
-            } else {
-                contentDiv.innerHTML = detailTable;
-            }
-        }
+                let sumTable = `
+                    <h2 style="font-size:16px; font-weight:bold; margin-bottom:10px; color:#FF3B30; text-transform:uppercase;">EXECUTIVE SUMMARY PER DC</h2>
+                    <table style="width:100%; border-collapse: collapse; font-size: 12px; text-align: left; margin-bottom: 30px;">
+                        <thead><tr style="background:#F9FAFB; color: #374151; font-weight: 900;">
+                            <th style="padding:12px 10px; border-bottom:2px solid #D1D5DB;">NAMA DC</th>
+                            <th style="padding:12px 10px; border-bottom:2px solid #D1D5DB; text-align:center;">TOTAL PO (CTN)</th>
+                            <th style="padding:12px 10px; border-bottom:2px solid #D1D5DB; text-align:center;">TOTAL SALES</th>
+                            <th style="padding:12px 10px; border-bottom:2px solid #D1D5DB; text-align:center;">TOTAL GAP</th>
+                        </tr></thead>
+                        <tbody>${sumRows}</tbody>
+                    </table>
+                    <div style="page-break-after: always; margin-bottom: 40px;"></div>
+                `;
+                contentDiv.innerHTML = sumTable + detailTable;
+            } else {
+                contentDiv.innerHTML = detailTable;
+            }
+        }
 
-        function downloadPDF(elementId, fileNamePrefix) {
-            const element = document.getElementById(elementId);
-            const wrapper = element.parentElement; 
-            
-            if(wrapper) { wrapper.style.overflowX = 'visible'; wrapper.scrollLeft = 0; }
-            window.scrollTo(0,0);
+        function downloadPDF(elementId, fileNamePrefix) {
+            const element = document.getElementById(elementId);
+            const wrapper = element.parentElement; 
+            
+            if(wrapper) { wrapper.style.overflowX = 'visible'; wrapper.scrollLeft = 0; }
+            window.scrollTo(0,0);
 
-            let fileName = `${fileNamePrefix}_${new Date().getTime()}.pdf`;
-            if (elementId === 'print-log') {
-                const monthVal = document.getElementById('report-month').value;
-                const dcVal = document.getElementById('report-dc').value;
-                fileName = `FFI_LogReport_${dcVal}_${monthVal}.pdf`;
-            } else if (elementId === 'print-analytic') {
-                const monthVal = document.getElementById('analytic-month').value;
-                fileName = `FFI_AnalyticReport_${monthVal}.pdf`;
-            }
-            
-            const opt = {
-                margin:       [10, 0, 10, 0], 
-                filename:     fileName,
-                image:        { type: 'jpeg', quality: 1 },
-                html2canvas:  { 
-                    scale: 2, 
-                    useCORS: true, 
-                    width: 794,        
-                    windowWidth: 794,  
-                    x: 0,              
-                    y: 0,
-                    scrollX: 0,
-                    scrollY: 0
-                },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-            
-            showToast("Sedang mencetak A4...");
-            
-            html2pdf().set(opt).from(element).save().then(() => {
-                if(wrapper) wrapper.style.overflowX = 'auto';
-                showToast("PDF Berhasil Diunduh!");
-            });
-        }
-    </script>
+            let fileName = `${fileNamePrefix}_${new Date().getTime()}.pdf`;
+            if (elementId === 'print-log') {
+                const monthVal = document.getElementById('report-month').value;
+                const dcVal = document.getElementById('report-dc').value;
+                fileName = `FFI_LogReport_${dcVal}_${monthVal}.pdf`;
+            } else if (elementId === 'print-analytic') {
+                const monthVal = document.getElementById('analytic-month').value;
+                fileName = `FFI_AnalyticReport_${monthVal}.pdf`;
+            }
+            
+            const opt = {
+                margin:       [10, 0, 10, 0], 
+                filename:     fileName,
+                image:        { type: 'jpeg', quality: 1 },
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true, 
+                    width: 794,        
+                    windowWidth: 794,  
+                    x: 0,              
+                    y: 0,
+                    scrollX: 0,
+                    scrollY: 0
+                },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            showToast("Sedang mencetak A4...");
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                if(wrapper) wrapper.style.overflowX = 'auto';
+                showToast("PDF Berhasil Diunduh!");
+            });
+        }
+    </script>
 </body>
 </html>
